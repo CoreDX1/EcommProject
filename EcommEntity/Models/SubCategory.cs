@@ -9,5 +9,6 @@ public class SubCategory
     public int id_category { get; set; }
     public Category? category { get; set; }
 
-    public IEnumerable<TypeProduct>? typeProducts { get; set; }
+    //
+    public ICollection<TypeProduct>? typeProducts { get; set; }
 }

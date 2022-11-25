@@ -1,4 +1,7 @@
-using EcommEntity.Data;
+using EcommData.Data;
+using ClientService.Interface;
+using ClientService.Services;
+using EcommEntity.Models;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +13,8 @@ builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddScoped<IProduct<Category>, Products>();
 
 builder.Services.AddDbContext<DataContext>(
         opt => opt.UseNpgsql(builder.Configuration.GetConnectionString("PostgresSQLConnection"))
