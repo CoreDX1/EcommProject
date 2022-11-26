@@ -2,6 +2,7 @@ using EcommEntity.Models;
 using ClientService.Interface;
 
 using EcommData.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace ClientService.Services;
 public class Products : IProduct<Category>{
@@ -12,8 +13,8 @@ public class Products : IProduct<Category>{
         this.dbpost = data;
     }
     
-    public async Task<Category> Get(){
-        var data = await dbpost.Categories.FindAsync();
+    public List<Category> Get(){
+        var data = dbpost.Categories.ToList();
         return data;
     }
 }
