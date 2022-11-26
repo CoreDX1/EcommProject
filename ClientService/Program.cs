@@ -15,6 +15,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IProduct<Category>, Products>();
+builder.Services.AddScoped<ISubCategory<SubCategory>, Subcategory>();
 
 builder.Services.AddDbContext<DataContext>(
         opt => opt.UseNpgsql(builder.Configuration.GetConnectionString("PostgresSQLConnection"))

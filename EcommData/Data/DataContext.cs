@@ -9,22 +9,26 @@ public class DataContext : DbContext
     }
 
     public DbSet<Category> Categories { get; set; }
-    // public DbSet<SubCategory> SubCategories { get; set; }
+    public DbSet<SubCategory> SubCategories { get; set; }
     // public DbSet<TypeProduct> TypeProducts { get; set; }
     // public DbSet<Product> Products { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
-        builder.Entity<Category>()
-            .ToTable("category")
+        builder.Entity<Category>(entity =>
+        {
+            entity.ToTable("category")
             .HasKey(c => c.id_category);
+        });
 
-        //
-        // builder.Entity<TypeProduct>(entity =>
-        // {
-        //     entity.ToTable("typeproduct");
-        //     entity.HasKey(p => p.id_type_prod);
-        // });
+
+        builder.Entity<SubCategory>(entity =>
+        {
+            entity.ToTable("subcategory")
+            .HasKey(c => c.id_sub_category);
+        });
+
+
         //
         // builder.Entity<Product>(entity =>
         // {

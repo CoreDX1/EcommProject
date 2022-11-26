@@ -5,16 +5,19 @@ using EcommData.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace ClientService.Services;
-public class Products : IProduct<Category>{
+public class Products : IProduct<Category>
+{
 
     private DataContext dbpost;
-    
-    public Products(DataContext data){
+
+    public Products(DataContext data)
+    {
         this.dbpost = data;
     }
-    
-    public List<Category> Get(){
-        var data = dbpost.Categories.ToList();
+
+    public async Task<List<Category>> Get()
+    {
+        List<Category> data = await dbpost.Categories.ToListAsync();
         return data;
     }
 }
