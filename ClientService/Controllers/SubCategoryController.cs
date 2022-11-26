@@ -21,4 +21,11 @@ public class SubCategoryController : Controller
         var data = await category.GetSubCategory();
         return StatusCode(200, data);
     }
+
+    [HttpPost]
+    public async Task<IActionResult> Insert(SubCategory form)
+    {
+        var data = await category.Insert(form);
+        return StatusCode(200, data);
+    }
 }
