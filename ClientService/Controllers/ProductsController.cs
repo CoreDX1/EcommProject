@@ -15,14 +15,14 @@ public class ProductsController : Controller
     }
 
     [HttpGet]
-    public async Task<IActionResult> Get()
+    public async Task<ActionResult<List<Category>>> Get()
     {
         var data = await category.Get();
         return StatusCode(200, data);
     }
 
     [HttpPost]
-    public async Task<IActionResult> Insert(Category form)
+    public async Task<ActionResult<Category>> Insert(Category form)
     {
         var data = await category.Insert(form);
         return StatusCode(200, data);
