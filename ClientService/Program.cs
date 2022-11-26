@@ -13,6 +13,21 @@ builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+string _Mycors = "Mycors";
+
+builder.Services.AddCors(options =>
+        {
+            options.AddPolicy(
+                    name: _Mycors,
+                    builder =>
+                    {
+                        builder
+                            .SetIsOriginAllowed(origin => new Uri(origin).Host == "localhost")
+                    .AllowAnyHeader()
+                    .AllowAnyMethod();
+                    }
+                    );
+        });
 
 builder.Services.AddScoped<IProduct<Category>, Products>();
 builder.Services.AddScoped<ISubCategory<SubCategory>, Subcategory>();
@@ -31,6 +46,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseCors(_Mycors);
+
 
 app.UseAuthorization();
 
