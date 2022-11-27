@@ -1,20 +1,29 @@
 import { useEffect, useState } from "react";
-import { Category } from "../../Interface/Ecommerce";
-import { MenuCategory } from "../../Api/Menu";
+import { Category, SubCategory } from "../../Interface/Ecommerce";
+import { MenuCategory, MenuSubcategory } from "../../Api/Menu";
 
 import "./Navbar.scss";
 
 export const Navbar = () => {
   const [get, setGet] = useState<Category[]>([]);
+  const [getSub, setSub] = useState<SubCategory[]>([]);
 
-  const Api = async () => {
+  const GetCategory = async () => {
     const get = await MenuCategory.getAll();
     setGet(get);
   };
 
+  const GetSub = async () => {
+    const get = await MenuSubcategory.getAll();
+    setSub(get);
+  };
+
+
   useEffect(() => {
-    Api();
+    GetCategory();
+      GetSub()
   }, []);
+    console.log(getSub)
 
   const Menu = () => {
     return get.map((item) => {
