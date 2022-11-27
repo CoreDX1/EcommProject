@@ -1,19 +1,25 @@
 import axios, { AxiosResponse } from "axios";
-import { Category, CategoryApi } from "../Interface/Ecommerce";
+import { Category, SubCategory, CategoryApi } from "../Interface/Ecommerce";
 
 class Menu<T> implements CategoryApi<T> {
+  private root: string;
   private url: string;
 
   constructor(url: string) {
     this.url = url;
+    this.root = "http://localhost:5020/api";
   }
 
-  public Category = async (): Promise<T[]> => {
-    const { data }: AxiosResponse<T[]> = await axios.get(this.url);
+  public getAll = async (): Promise<T[]> => {
+    const { data }: AxiosResponse<T[]> = await axios.get(
+      `${this.root}/${this.url}`
+    );
     return data;
   };
 }
 
-const url = "http://localhost:5020/api/Products";
+const urlCategory = "Products";
+const urlSubCategory = "SubCategory";
 
-export const MenuApi = new Menu<Category>(url);
+export const MenuCategory = new Menu<Category>(urlCategory);
+export const MenuSubcategory = new Menu<SubCategory>(urlSubCategory);

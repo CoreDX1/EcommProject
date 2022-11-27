@@ -3,6 +3,12 @@ export interface Category{
     name : string
 }
 
+export interface SubCategory{
+    id_sub_category : number;
+    name : string;
+    id_category : number
+}
+
 export interface CategoryApi<T> {
-    Category : () => Promise<T[]>
+    getAll : () => Promise<T[]>
 }

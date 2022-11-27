@@ -1,0 +1,39 @@
+.Navbar {
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  max-width: 1000px;
+  line-height: 80px;
+  z-index: 100;
+
+  .Navbar-logo {
+    margin-left: 20px;
+    z-index: 100;
+    cursor: pointer;
+    h2{
+        color: #95bdd8;
+        font-weight: 300;
+        font-size: 35px;
+        letter-spacing: 2px;
+    }
+    span{
+        color: #0590ec;
+        font-weight: 700;
+    }
+  }
+
+
+  .links{
+      .link{
+          display: inline-block;
+          a{
+              text-decoration: none;
+              color: black;
+              font-size: 10px;
+              margin: 0 10px;
+              letter-spacing: 2px;
+          }
+      }
+  }
+}
+
