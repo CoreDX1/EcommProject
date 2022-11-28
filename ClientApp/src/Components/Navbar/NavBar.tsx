@@ -6,49 +6,69 @@ import "./Navbar.scss";
 
 export const Navbar = () => {
   const [get, setGet] = useState<Category[]>([]);
-  const [getSub, setSub] = useState<SubCategory[]>([]);
+  const [getsub, setSub] = useState<SubCategory[]>([]);
 
   const GetCategory = async () => {
     const get = await MenuCategory.getAll();
     setGet(get);
   };
 
-  const GetSub = async () => {
+  const GetSubCategory = async () => {
     const get = await MenuSubcategory.getAll();
     setSub(get);
   };
 
-
   useEffect(() => {
     GetCategory();
-      GetSub()
+    GetSubCategory();
   }, []);
-    console.log(getSub)
 
-  const Menu = () => {
-    return get.map((item) => {
-      return (
-        <li className="link" key={item.id_category}>
-          <a href="">{item.name}</a>
-        </li>
-      );
-    });
+  const SubMenuID = (id: number) => {
+    const stringID = getsub.filter((x) => x.id_category == id);
+    return stringID;
   };
 
   return (
-    <div>
-      <header>
-        <nav>
-          <div className="Navbar">
-            <div className="Navbar-logo">
-              <h2>
-                <span>Logo</span>
-              </h2>
-            </div>
-            <ul className="links">{Menu()}</ul>
-          </div>
-        </nav>
-      </header>
-    </div>
+    <header>
+      <nav className="menu-bar">
+        <div className="menu-1">
+          <h1>Logo</h1>
+          <ul className="menu">
+            {get.map((item) => {
+              return (
+                <li className="dropdown" key={item.id_category}>
+                  <a href="">{item.name}</a>
+                  <ul className="dropdown-menu">
+                    {SubMenuID(item.id_category).map((x) => {
+                      return (
+                        <li key={x.id_sub_category}>
+                          <a href="">{x.name}</a>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+        <div className="menu-2">
+          <ul>
+            <li>
+              <img src="/magnifying-glass-solid.svg" alt="" />
+              <a href="">Buscar</a>
+            </li>
+            <li>
+              <img src="/cart-shopping-solid.svg" alt="" />
+              <a href="">Items</a>
+            </li>
+            <li>
+              <img src="/user-solid.svg" alt="" />
+              <a href="">Inciar Sesion</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
   );
 };
