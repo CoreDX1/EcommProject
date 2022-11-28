@@ -2,8 +2,6 @@ using EcommEntity.Models;
 using ClientService.Interface;
 
 using EcommData.Data;
-using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json;
 
 namespace ClientService.Services;
 public class Products : IProduct<Category>
@@ -16,20 +14,10 @@ public class Products : IProduct<Category>
         this.dbpost = data;
     }
 
-    public IQueryable Get()
+    public IEnumerable<Category> Get()
     {
-        var connet = dbpost;
-        var res = from s in connet.SubCategories
-                  join s2 in connet.Categories
-                  on s.id_category equals s2.id_category
-                  select new
-                  {
-                      id_sub = s.id_sub_category,
-                      sub_name = s.name,
-                      id_category = s2.id_category,
-                      name_Category = s2.name
-                  };
-
+        var res = from c in dbpost.Categories
+                  select c;
         return res;
     }
 

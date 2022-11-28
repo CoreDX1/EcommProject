@@ -17,7 +17,7 @@ public class ProductsController : Controller
     [HttpGet]
     public ActionResult<Category> Get()
     {
-        IQueryable data = category.Get();
+        var data = category.Get();
         return StatusCode(200, data);
     }
 
