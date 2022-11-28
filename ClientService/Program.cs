@@ -29,7 +29,7 @@ builder.Services.AddCors(options =>
                     );
         });
 
-builder.Services.AddScoped<IProduct<Category>, Products>();
+builder.Services.AddScoped<ICategory<Category>, CategorySer>();
 builder.Services.AddScoped<ISubCategory<SubCategory>, Subcategory>();
 
 builder.Services.AddDbContext<DataContext>(

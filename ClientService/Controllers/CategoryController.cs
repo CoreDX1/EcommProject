@@ -8,8 +8,8 @@ namespace ClientService.Controllers;
 [Route("api/[controller]")]
 public class ProductsController : Controller
 {
-    private IProduct<Category> category;
-    public ProductsController(IProduct<Category> category)
+    private ICategory<Category> category;
+    public ProductsController(ICategory<Category> category)
     {
         this.category = category;
     }

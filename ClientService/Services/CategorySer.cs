@@ -4,12 +4,13 @@ using ClientService.Interface;
 using EcommData.Data;
 
 namespace ClientService.Services;
-public class Products : IProduct<Category>
+
+public class CategorySer : ICategory<Category>
 {
 
     private DataContext dbpost;
 
-    public Products(DataContext data)
+    public CategorySer(DataContext data)
     {
         this.dbpost = data;
     }
