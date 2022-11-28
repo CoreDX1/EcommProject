@@ -6,7 +6,7 @@ public class Product
     public string? clave { get; set; }
     public int price { get; set; }
     public int quantity { get; set; }
-    public DateTime date_created { get; set; }
+    public DateTime date_create { get; set; }
     // Foreign Key TypeProduct
     public int id_type_prod { get; set; }
 }

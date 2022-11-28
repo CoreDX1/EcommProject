@@ -31,6 +31,8 @@ builder.Services.AddCors(options =>
 
 builder.Services.AddScoped<ICategory<Category>, CategorySer>();
 builder.Services.AddScoped<ISubCategory<SubCategory>, Subcategory>();
+builder.Services.AddScoped<ITypeProduct<TypeProduct>, TypeProductSer>();
+builder.Services.AddScoped<IProduct<Product>, ProductSer>();
 
 builder.Services.AddDbContext<DataContext>(
         opt => opt.UseNpgsql(builder.Configuration.GetConnectionString("PostgresSQLConnection"))

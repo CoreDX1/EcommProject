@@ -1,10 +1,20 @@
 @hostname = http://localhost:5020/api
 ### Category
-@urlC = Products
+@urlC = Category
 GET {{hostname}}/{{urlC}}
 Content-Type: application/json
 
 ### SubCategory
 @urlS = SubCategory
 GET {{hostname}}/{{urlS}}
+Content-Type: application/json
+
+### TypeProduct
+@urlT = TypeProduct
+GET {{hostname}}/{{urlT}}
+Content-Type: application/json
+
+### TypeProduct
+@urlP = Product
+GET {{hostname}}/{{urlP}}
 Content-Type: application/json

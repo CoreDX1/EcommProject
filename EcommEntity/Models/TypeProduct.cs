@@ -6,7 +6,8 @@ public class TypeProduct
 
     // Foreign Key SubCategory
     public int id_sub_category { get; set; }
-    public SubCategory? subCategory { get; set; }
 
-    public IEnumerable<Product>? products { get; set; }
+    // public SubCategory? subCategory { get; set; }
+
+    // public IEnumerable<Product>? products { get; set; }
 }

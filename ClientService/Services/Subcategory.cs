@@ -18,8 +18,8 @@ public class Subcategory : ISubCategory<SubCategory>
 
     public async Task<List<SubCategory>> GetSubCategory()
     {
-        List<SubCategory> data = await dbpost.SubCategories.ToListAsync();
-        return data;
+        var response = await dbpost.SubCategories.ToListAsync();
+        return response;
     }
 
     public async Task<SubCategory> Insert(SubCategory form)

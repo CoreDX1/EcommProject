@@ -2,6 +2,7 @@ using EcommEntity.Models;
 using ClientService.Interface;
 
 using EcommData.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace ClientService.Services;
 
@@ -15,11 +16,10 @@ public class CategorySer : ICategory<Category>
         this.dbpost = data;
     }
 
-    public IEnumerable<Category> Get()
+    public async Task<List<Category>> Get()
     {
-        var res = from c in dbpost.Categories
-                  select c;
-        return res;
+        var response = await dbpost.Categories.ToListAsync();
+        return response;
     }
 
     public async Task<Category> Insert(Category insertCategory)

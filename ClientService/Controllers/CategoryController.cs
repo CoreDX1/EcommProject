@@ -6,18 +6,18 @@ namespace ClientService.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class ProductsController : Controller
+public class CategoryController : Controller
 {
     private ICategory<Category> category;
-    public ProductsController(ICategory<Category> category)
+    public CategoryController(ICategory<Category> category)
     {
         this.category = category;
     }
 
     [HttpGet]
-    public ActionResult<Category> Get()
+    public async Task<ActionResult<Category>> Get()
     {
-        var data = category.Get();
+        var data = await category.Get();
         return StatusCode(200, data);
     }
 
