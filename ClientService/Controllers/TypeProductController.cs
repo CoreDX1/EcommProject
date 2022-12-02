@@ -18,7 +18,7 @@ public class TypeProductController : Controller
     [HttpGet]
     public async Task<ActionResult<TypeProduct>> Get()
     {
-        var data = await typeProduct.GetAll();
+        List<TypeProduct> data = await typeProduct.GetAll();
         return StatusCode(200, data);
     }
 }

@@ -9,6 +9,7 @@ namespace ClientService.Controllers;
 public class CategoryController : Controller
 {
     private ICategory<Category> category;
+
     public CategoryController(ICategory<Category> category)
     {
         this.category = category;

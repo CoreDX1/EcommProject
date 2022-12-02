@@ -8,7 +8,6 @@ namespace ClientService.Services;
 
 public class CategorySer : ICategory<Category>
 {
-
     private DataContext dbpost;
 
     public CategorySer(DataContext data)
@@ -18,7 +17,7 @@ public class CategorySer : ICategory<Category>
 
     public async Task<List<Category>> Get()
     {
-        var response = await dbpost.Categories.ToListAsync();
+        List<Category> response = await dbpost.Categories.ToListAsync();
         return response;
     }
 
