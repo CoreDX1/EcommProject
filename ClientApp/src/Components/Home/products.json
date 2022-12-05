@@ -1,0 +1,38 @@
+[
+  {
+    "id" : 0,
+    "name" : "Buzo Canguro",
+    "price" : 1000,
+    "pathImange" : "Products/BuzoCanguro.jpg"
+  },
+  {
+    "id" : 1,
+    "name" : "Buzo Entallado",
+    "price" : 1500,
+    "pathImange" : "Products/BuzoEntallado.jpg"
+  },
+  {
+    "id" : 2,
+    "name" : "Buzo Friza",
+    "price" : 2000,
+    "pathImange" : "Products/BuzoFriza.jpg"
+  },
+  {
+    "id" : 3,
+    "name" : "Medias",
+    "price" : 2500,
+    "pathImange" : "Products/Medias.jpg"
+  },
+  {
+    "id" : 4,
+    "name" : "Medias Cortas",
+    "price" : 2500,
+    "pathImange" : "Products/MediasCortos.jpg"
+  },
+  {
+    "id" : 5,
+    "name" : "Pantalones Campo",
+    "price" : 2500,
+    "pathImange" : "Products/PantalonCampo.jpg"
+  }
+]

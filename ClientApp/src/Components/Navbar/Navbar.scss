@@ -1,3 +1,5 @@
+@import "NavbarRules";
+
 header {
   h1 {
     padding: 15px 0;
@@ -7,37 +9,45 @@ header {
 }
 
 .menu-bar {
-  background-color: #fff;
+  background-color: $color-background;
   display: flex;
   justify-content: space-between;
   align-items: center;
+
   .menu-1 {
     display: flex;
     align-items: center;
+
     ul.menu {
       display: flex;
+
       li {
         list-style: none;
+
         a {
           padding: 15px 20px;
           text-decoration: none;
-          color: #5077b5;
+          color: $color-font;
           font-size: 20px;
         }
+
         &:hover {
-          & > a {
-            background-color: white;
+          &>a {
+            background-color: $color-background;
           }
+
           &.dropdown {
-            & > ul {
+            &>ul {
               visibility: visible;
               transform: rotateX(0);
               top: calc(100% + 15px);
             }
           }
         }
+
         &.dropdown {
           position: relative;
+
           ul {
             position: absolute;
             flex-wrap: wrap;
@@ -46,10 +56,11 @@ header {
             left: 0;
             padding-top: 10px;
             border-radius: 5px;
-            background-color: white;
+            background-color: $color-background;
             transition: all 0.3s ease-out;
             visibility: hidden;
             z-index: 1;
+
             &::after {
               position: absolute;
               content: "";
@@ -57,29 +68,32 @@ header {
               left: 30px;
               width: 15px;
               height: 15px;
-              // background-color: blue;
-              // transform: rotate(45deg);
               z-index: -1;
             }
+
             li {
               width: 100%;
+
               a {
                 width: 100%;
-                background-color: #fff;
+                background-color: $color-background;
                 box-sizing: border-box;
                 padding: 10px 20px;
                 display: inline-block;
               }
+
               &:last-child {
                 a {
                   border-bottom-right-radius: 5px;
                   border-bottom-left-radius: 5px;
                 }
               }
+
               &:hover {
-                & > a {
+                &>a {
                   background-color: yellow;
                 }
+
                 &.dropdown {
                   ul {
                     top: 0;
@@ -88,12 +102,13 @@ header {
                   }
                 }
               }
+
               &.dropdown {
                 ul {
                   padding-top: 0;
                   left: calc(100% + 15px);
                   top: 0;
-                  // transform: rotateX(30deg) rotateY(90deg);
+
                   li {
                     &:first-child {
                       a {
@@ -102,6 +117,7 @@ header {
                       }
                     }
                   }
+
                   &::after {
                     top: 15px;
                     left: -7px;
@@ -114,21 +130,28 @@ header {
       }
     }
   }
+
   .menu-2 {
     ul {
       display: flex;
-      flex-direction: row;
+      flex : {
+        direction:  row;
+      }
+
       li {
         list-style: none;
         padding: 15px;
         display: flex;
         flex-direction: row;
+
         img {
           width: 15px;
         }
+
         a {
           text-decoration: none;
           padding: 5px;
+          color: $color-font;
         }
       }
     }

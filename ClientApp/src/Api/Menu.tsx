@@ -18,7 +18,7 @@ class Menu<T> implements CategoryApi<T> {
   };
 }
 
-const urlCategory = "Products";
+const urlCategory = "Category";
 const urlSubCategory = "SubCategory";
 
 export const MenuCategory = new Menu<Category>(urlCategory);

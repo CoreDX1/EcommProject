@@ -1,14 +1,13 @@
 using ClientService.Interface;
 using EcommEntity.Models;
-using Npgsql;
 
 using EcommData.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace ClientService.Services;
+
 public class Subcategory : ISubCategory<SubCategory>
 {
-
     private DataContext dbpost;
 
     public Subcategory(DataContext data)

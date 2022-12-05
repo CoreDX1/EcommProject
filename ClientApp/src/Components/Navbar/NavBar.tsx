@@ -4,7 +4,7 @@ import { MenuCategory, MenuSubcategory } from "../../Api/Menu";
 
 import "./Navbar.scss";
 
-export const Navbar = () => {
+export const Navbar = () : JSX.Element => {
     const [get, setGet] = useState<Category[]>([]);
     const [getsub, setSub] = useState<SubCategory[]>([]);
 
@@ -14,11 +14,11 @@ export const Navbar = () => {
     };
 
     const GetSubCategory = async (): Promise<void> => {
-        const  get = await MenuSubcategory.getAll();
+        const get = await MenuSubcategory.getAll();
         setSub(get);
     };
 
-    useEffect(() => {
+    useEffect(() : void => {
         GetCategory();
         GetSubCategory();
     }, []);
@@ -34,14 +34,14 @@ export const Navbar = () => {
         <header>
             <nav className="menu-bar">
                 <div className="menu-1">
-                    <h1>Logo</h1>
+                    <h1>LOGO</h1>
                     <ul className="menu">
-                        {get.map((item) => {
+                        {get.map((item : Category) : JSX.Element => {
                             return (
                                 <li className="dropdown" key={item.id_category}>
                                     <a href="">{item.name}</a>
                                     <ul className="dropdown-menu">
-                                        {SubMenuID(item.id_category).map((x) => {
+                                        {SubMenuID(item.id_category).map((x : SubCategory) : JSX.Element => {
                                             return (
                                                 <li key={x.id_sub_category}>
                                                     <a href="">{x.name}</a>
