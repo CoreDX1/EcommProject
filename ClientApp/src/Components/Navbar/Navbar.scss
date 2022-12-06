@@ -2,10 +2,12 @@
 @use "NavbarRules" as r;
 
 header {
-  h1 {
+
+  .menu__logo {
     padding: 15px 0;
     font-size: 35px;
     padding-left: 10px;
+    text-decoration: none;
   }
 }
 
