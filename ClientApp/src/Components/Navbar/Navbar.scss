@@ -1,4 +1,5 @@
-@import "NavbarRules";
+@use "../Scss/font" as f;
+@use "NavbarRules" as r;
 
 header {
   h1 {
@@ -9,7 +10,7 @@ header {
 }
 
 .menu-bar {
-  background-color: $color-background;
+  background-color: r.$color-background;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -27,17 +28,18 @@ header {
         a {
           padding: 15px 20px;
           text-decoration: none;
-          color: $color-font;
+          color: r.$color-font;
           font-size: 20px;
+          font-weight: f.$font-weight;
         }
 
         &:hover {
-          &>a {
-            background-color: $color-background;
+          & > a {
+            background-color: r.$color-background;
           }
 
           &.dropdown {
-            &>ul {
+            & > ul {
               visibility: visible;
               transform: rotateX(0);
               top: calc(100% + 15px);
@@ -56,7 +58,7 @@ header {
             left: 0;
             padding-top: 10px;
             border-radius: 5px;
-            background-color: $color-background;
+            background-color: r.$color-background;
             transition: all 0.3s ease-out;
             visibility: hidden;
             z-index: 1;
@@ -76,23 +78,36 @@ header {
 
               a {
                 width: 100%;
-                background-color: $color-background;
+                background-color: r.$color-background;
                 box-sizing: border-box;
                 padding: 10px 20px;
                 display: inline-block;
-              }
 
-              &:last-child {
-                a {
-                  border-bottom-right-radius: 5px;
-                  border-bottom-left-radius: 5px;
+                &::after {
+                  display: block;
+                  content: "";
+                  margin: auto;
+                  width: 0;
+                  height: 2px;
+                  background-color: red;
+                  transition: width 0.3s;
+                }
+                &:hover::after {
+                  width: 100%;
                 }
               }
+            }
 
-              &:hover {
-                &>a {
-                  background-color: yellow;
-                }
+            &:last-child {
+              a {
+                border-bottom-right-radius: 5px;
+                border-bottom-left-radius: 5px;
+              }
+            }
+
+            &:hover {
+              & > a {
+                // background-color: yellow;
 
                 &.dropdown {
                   ul {
@@ -131,27 +146,41 @@ header {
     }
   }
 
-  .menu-2 {
-    ul {
+  nav {
+    .nav {
       display: flex;
       flex : {
-        direction:  row;
+        direction: row;
       }
 
-      li {
+      &__item {
         list-style: none;
         padding: 15px;
         display: flex;
         flex-direction: row;
 
-        img {
+        .nav__logo {
           width: 15px;
         }
 
-        a {
+        .nav__link {
           text-decoration: none;
           padding: 5px;
-          color: $color-font;
+          color: r.$color-font;
+          font-weight: f.$font-weight;
+          display: inline-block;
+          &::after {
+            display: block;
+            content: "";
+            margin: auto;
+            width: 0;
+            height: 2px;
+            background-color: red;
+            transition: width 0.3s;
+          }
+          &:hover::after {
+            width: 100%;
+          }
         }
       }
     }

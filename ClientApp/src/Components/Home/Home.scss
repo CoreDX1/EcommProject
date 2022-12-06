@@ -1,7 +1,11 @@
 .centro {
   height: 230px;
-  background: rgb(19,98,99);
-  background: linear-gradient(0deg, rgba(19,98,99,1) 0%, rgba(45,53,253,1) 100%);
+  background: rgb(19, 98, 99);
+  background: linear-gradient(
+    0deg,
+    rgba(19, 98, 99, 1) 0%,
+    rgba(45, 53, 253, 1) 100%
+  );
   background-attachment: fixed;
   background-size: cover;
 

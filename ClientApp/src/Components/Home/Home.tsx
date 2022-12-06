@@ -1,4 +1,6 @@
 import "./Home.scss";
+import "./_cards.scss";
+
 import dataJson from "./products.json";
 
 interface Product {
@@ -13,15 +15,14 @@ export const Home = (): JSX.Element => {
     return dataJson.map((item: Product): JSX.Element => {
       return (
         <ul className="cards" key={item.id}>
-          <li className="cards_item">
+          <li className="cards__item">
             <div className="card">
-              <div className="card_imagen">
+              <div className="card__imagen">
                 <img src={item.pathImange} />
               </div>
-              <div className="card_content">
-                <h2 className="card_title">{item.name}</h2>
-                <h2 className="card_price">{item.price}</h2>
-                <button className="card_button">Buy</button>
+              <div className="card__content">
+                <h2 className="card__title">{item.name}</h2>
+                <h2 className="card__price">$ {item.price}</h2>
               </div>
             </div>
           </li>
@@ -36,10 +37,8 @@ export const Home = (): JSX.Element => {
         <p>Imagen</p>
       </div>
       <main>
-        <h1>
-          Titulo
-          {renderProduct()}
-        </h1>
+        <h3 className="title">Titulo</h3>
+        <div className="product_content">{renderProduct()}</div>
       </main>
     </>
   );
