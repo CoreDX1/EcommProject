@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from "axios";
-import { Category, SubCategory, CategoryApi } from "../Interface/Ecommerce";
+import { Category, SubCategory, CategoryApi , IMenuDinamic } from "../Interface/Ecommerce";
 
 class Menu<T> implements CategoryApi<T> {
   private root: string;
@@ -20,6 +20,9 @@ class Menu<T> implements CategoryApi<T> {
 
 const urlCategory = "Category";
 const urlSubCategory = "SubCategory";
+const urlMenu = "Menu";
 
 export const MenuCategory = new Menu<Category>(urlCategory);
 export const MenuSubcategory = new Menu<SubCategory>(urlSubCategory);
+
+export const MenuDinamic = new Menu<IMenuDinamic>(urlMenu);

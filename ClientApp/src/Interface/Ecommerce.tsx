@@ -10,6 +10,12 @@ export interface SubCategory{
     id_category : number
 }
 
+export interface IMenuDinamic{
+    id_category : 1,
+    name : string
+    submenu : []
+}
+
 export interface CategoryApi<T> {
     getAll : () => Promise<T[]>
 }

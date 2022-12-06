@@ -1,6 +1,6 @@
 import { Component, ReactNode } from "react";
-import { Category, SubCategory } from "../../Interface/Ecommerce";
-import { MenuCategory, MenuSubcategory } from "../../Api/Menu";
+import { Category, SubCategory, IMenuDinamic } from "../../Interface/Ecommerce";
+import { MenuCategory, MenuSubcategory, MenuDinamic } from "../../Api/Menu";
 
 import "./Navbar.scss";
 
@@ -9,19 +9,24 @@ type NavbarProps = {};
 type NavbarState = {
   categories: Category[];
   subcategories: SubCategory[];
+  menuDinamic: IMenuDinamic[];
 };
 
 export class Navbar extends Component<NavbarProps, NavbarState> {
   state = {
     categories: [],
     subcategories: [],
+    menuDinamic: [],
   };
 
   async componentDidMount() {
     const categories = await MenuCategory.getAll();
     const subcategories = await MenuSubcategory.getAll();
+    const menuDinamic = await MenuDinamic.getAll();
 
-    this.setState({ categories, subcategories });
+      console.log(menuDinamic)
+
+    this.setState({ categories, subcategories, menuDinamic });
   }
 
   SubMenuID = (id: number): SubCategory[] => {
@@ -35,7 +40,9 @@ export class Navbar extends Component<NavbarProps, NavbarState> {
       <header>
         <nav className="menu-bar">
           <div className="menu-1">
-            <a className="menu__logo" href="/">Logo</a>
+            <a className="menu__logo" href="/">
+              Logo
+            </a>
             <ul className="menu">
               {this.state.categories.map((item: Category): JSX.Element => {
                 return (
