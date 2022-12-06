@@ -3,7 +3,7 @@ import "./App.css";
 import { Home } from "./Components/Home/Home";
 import { Login } from "./Components/Login/Login";
 import { Navbar } from "./Components/Navbar/NavBar";
-import { Quote } from "./Components/quote";
+import { Quote } from "./Components/Quote/quote";
 
 function App(): JSX.Element {
   return (

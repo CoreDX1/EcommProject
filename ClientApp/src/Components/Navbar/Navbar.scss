@@ -1,8 +1,7 @@
-@use "../Scss/font" as f;
-@use "NavbarRules" as r;
+@use '../Scss/font' as f;
+@use 'NavbarRules' as r;
 
 header {
-
   .menu__logo {
     padding: 15px 0;
     font-size: 35px;

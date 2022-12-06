@@ -13,7 +13,7 @@ export interface SubCategory{
 export interface IMenuDinamic{
     id_category : 1,
     name : string
-    submenu : []
+    submenu : Array<string>
 }
 
 export interface CategoryApi<T> {

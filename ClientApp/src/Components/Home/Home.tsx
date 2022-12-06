@@ -11,18 +11,9 @@ interface Product {
   pathImange: string;
 }
 
-type HomeProps = {};
-type HomeState = {
-  products: Product[];
-};
-
-export class Home extends Component<HomeProps, HomeState> {
-  state = {
-    products: dataJson,
-  };
-
-  renderProduct = () => {
-    return this.state.products.map((item: Product): JSX.Element => {
+export const Home = (): JSX.Element => {
+  const renderProduct = (): JSX.Element[] => {
+    return dataJson.map((item: Product): JSX.Element => {
       return (
         <ul className="cards" key={item.id}>
           <li className="cards__item">
@@ -41,17 +32,15 @@ export class Home extends Component<HomeProps, HomeState> {
     });
   };
 
-  render(): ReactNode {
-    return (
-      <>
-        <div className="centro">
-          <p>Imagen</p>
-        </div>
-        <main>
-          <h3 className="title">Titulo</h3>
-          <div className="product_content">{this.renderProduct()}</div>
-        </main>
-      </>
-    );
-  }
-}
+  return (
+    <>
+      <div className="centro">
+        <p>Imagen</p>
+      </div>
+      <main>
+        <h3 className="title">Titulo</h3>
+        <div className="product_content">{renderProduct()}</div>
+      </main>
+    </>
+  );
+};
