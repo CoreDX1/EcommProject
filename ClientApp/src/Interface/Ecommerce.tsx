@@ -1,21 +1,34 @@
-export interface Category{
-    id_category: number;
-    name : string
-    subMenu : Array<SubCategory>
+interface Category {
+  id_category: number;
+  name: string;
+  subMenu: Array<SubCategory>;
 }
 
-export interface SubCategory{
-    id_sub_category : number;
-    name : string;
-    id_category : number
+interface SubCategory {
+  id_sub_category: number;
+  name: string;
+  id_category: number;
 }
 
-export interface IMenuDinamic{
-    id_category : 1,
-    name : string
-    submenu : Array<string>
+interface IMenuDinamic {
+  id_category: number;
+  name: string;
+  submenu: Array<string>;
+}
+
+interface Usuario {
+  id_user: number;
+  name: string;
+  password: string;
 }
 
 export interface CategoryApi<T> {
-    getAll : () => Promise<T[]>
+  getAll: () => Promise<T[]>;
+}
+
+export interface IEcommerse {
+  category: Category;
+  subcategory: SubCategory;
+  imenuDinamic: IMenuDinamic;
+  usuario: Usuario;
 }

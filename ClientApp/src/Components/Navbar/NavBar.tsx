@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
-import { IMenuDinamic } from "../../Interface/Ecommerce";
-import { MenuDinamic } from "../../Api/Menu";
+import { IEcommerse } from "../../Interface/Ecommerce";
+import { ListGet } from "../../Api/Menu";
 
 import "./Navbar.scss";
 
 export const Navbar = (): JSX.Element => {
-  const [get, setGet] = useState<IMenuDinamic[]>([]);
+  const [get, setGet] = useState<IEcommerse["imenuDinamic"][]>([]);
 
   const GetSubCategory = async (): Promise<void> => {
-    const get = await MenuDinamic.getAll();
+    const get = await ListGet.menuDinamic.getAll();
     setGet(get);
   };
 
@@ -24,12 +24,12 @@ export const Navbar = (): JSX.Element => {
             logo
           </a>
           <ul className="menu">
-            {get.map((item: IMenuDinamic): JSX.Element => {
+            {get.map((item : IEcommerse["imenuDinamic"]): JSX.Element => {
               return (
                 <li className="dropdown" key={item.id_category}>
                   <a href="">{item.name}</a>
                   <ul className="dropdown-menu">
-                    {item.submenu.map((x, index) => {
+                    {item.submenu.map((x : string, index : number) : JSX.Element => {
                       return (
                         <li key={index}>
                           <a href="">{x}</a>

@@ -4,6 +4,7 @@ import { Home } from "./Components/Home/Home";
 import { Login } from "./Components/Login/Login";
 import { Navbar } from "./Components/Navbar/NavBar";
 import { Quote } from "./Components/Quote/quote";
+import { NotFound } from "./Pages/NotFound";
 
 function App(): JSX.Element {
   return (
@@ -13,6 +14,7 @@ function App(): JSX.Element {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
+        <Route path="*" element={<NotFound/>}/>
       </Routes>
     </>
   );

@@ -1,27 +1,47 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { ListGet } from "../../Api/Menu";
+import { IEcommerse } from "../../Interface/Ecommerce";
 import "./_from.scss";
 
-const DATABASE = {
-  username: "christian",
-  password: "index",
-};
+const DATABASE = [
+  {
+    id: 1,
+    username: "christian",
+    password: "index",
+  },
+];
 
 interface ILogin {
   username: string;
   password: string;
 }
 
-export const Login = () => {
+export const Login = (): JSX.Element => {
   const navigate = useNavigate();
+
+  const [usuario, setUsuario] = useState<IEcommerse["usuario"][]>([]);
 
   const [login, setLogin] = useState<ILogin>();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
+  const GetUser = async (): Promise<void> => {
+    const date = await ListGet.usuario.getAll();
+    setUsuario(date);
+  };
+
+  useEffect(() => {
+    GetUser();
+  }, []);
+
   const isValidLogin = () => {
-    if (username == DATABASE.username && password == DATABASE.password) {
+    const verficate = usuario.some(
+      (p: IEcommerse["usuario"]): boolean =>
+        p.name == username && p.password == password
+    );
+    if (verficate) {
       return true;
     }
     setError("Error de autenticacion");

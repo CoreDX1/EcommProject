@@ -2,7 +2,6 @@ import "./Home.scss";
 import "./_cards.scss";
 
 import dataJson from "./products.json";
-import { Component, ReactNode } from "react";
 
 interface Product {
   id: number;
