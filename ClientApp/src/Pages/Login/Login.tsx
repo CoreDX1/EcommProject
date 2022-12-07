@@ -1,56 +1,35 @@
 import { Field, Form, Formik } from "formik";
 import "./_from.scss";
-import * as Yup from "yup";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { ListGet } from "../../Api/Menu";
 import { IEcommerse } from "../../Interface/Ecommerce";
-
-const SignupSchema = Yup.object().shape({
-  name: Yup.string().min(4, "Es muy corto").max(30, "Es muy largo").required(),
-  password: Yup.string()
-    .min(2, "La contraseña es corta")
-    .max(20, "La contraseña es larga")
-    .required(),
-});
-interface IUsuario {
-  name: string;
-  password: string;
-}
-
-const IsValid = () => {};
+import { useNavigate } from "react-router-dom";
 
 export const Login = (): JSX.Element => {
-  const [user, setUser] = useState<IEcommerse["usuario"][]>([]);
+  const [login, setLogin] = useState<IEcommerse["login"]>();
+  const navigate = useNavigate();
 
-  const [login, setLogin] = useState<IUsuario>();
-
-  const GetUsuarios = async () => {
-    const date = await ListGet.usuario.getAll();
-    setUser(date);
-  };
-
-  useEffect(() => {
-    GetUsuarios();
-  }, []);
-
-  console.log(user);
   return (
     <div>
       <Formik
         initialValues={{ name: "", password: "" }}
-        validationSchema={SignupSchema}
-        onSubmit={(value) => {
-          setLogin(value);
-          console.log(login);
+        onSubmit={async (value) => {
+          try {
+            const response = await ListGet.login.post(value);
+            setLogin(response);
+            if (response.success) {
+              navigate("/");
+            }
+          } catch (ex) {}
         }}
       >
-        {({handleChange, handleSubmit, errors, touched }) => (
+        {({ handleChange, handleSubmit, errors, touched }) => (
           <Form onSubmit={handleSubmit}>
             <label>Nombre</label>
-            <Field name="name" />
+            <input type="text" name="name" onChange={handleChange} />
             {errors.name && touched.name ? <div>{errors.name}</div> : null}
             <label>Contraseña</label>
-            <Field name="password" />
+            <input type="password" name="password" onChange={handleChange} />
             {errors.password && touched.password ? (
               <div>{errors.password}</div>
             ) : null}

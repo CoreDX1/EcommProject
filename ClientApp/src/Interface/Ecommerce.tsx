@@ -17,7 +17,6 @@ interface IMenuDinamic {
 }
 
 interface Usuario {
-  id_user: number;
   name: string;
   password: string;
 }
@@ -26,9 +25,17 @@ export interface CategoryApi<T> {
   getAll: () => Promise<T[]>;
 }
 
+interface Login {
+  success: boolean;
+  messsage: string;
+  usuarioApi: { id_user: number; name: string; password: string; rol: string };
+  result: string;
+}
+
 export interface IEcommerse {
   category: Category;
   subcategory: SubCategory;
   imenuDinamic: IMenuDinamic;
   usuario: Usuario;
+  login: Login;
 }
