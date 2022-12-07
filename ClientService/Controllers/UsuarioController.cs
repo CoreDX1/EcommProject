@@ -60,7 +60,7 @@ public class UsuarioController : Controller
             return new
             {
                 success = false,
-                message = "Credenciales icorrectas",
+                message = "Credenciales incorrectas",
                 result = ""
             };
         }
@@ -89,7 +89,8 @@ public class UsuarioController : Controller
         {
             success = true,
             messsage = "Exito",
-            result = new JwtSecurityTokenHandler().WriteToken(token)
+            usuarioApi,
+            result = new JwtSecurityTokenHandler().WriteToken(token),
         };
     }
 }
