@@ -17,6 +17,8 @@ interface IUsuario {
   password: string;
 }
 
+const IsValid = () => {};
+
 export const Login = (): JSX.Element => {
   const [user, setUser] = useState<IEcommerse["usuario"][]>([]);
 
@@ -24,13 +26,14 @@ export const Login = (): JSX.Element => {
 
   const GetUsuarios = async () => {
     const date = await ListGet.usuario.getAll();
-      setUser(date)
+    setUser(date);
   };
+
   useEffect(() => {
     GetUsuarios();
-  },[]);
+  }, []);
 
-    console.log(user)
+  console.log(user);
   return (
     <div>
       <Formik
@@ -38,13 +41,15 @@ export const Login = (): JSX.Element => {
         validationSchema={SignupSchema}
         onSubmit={(value) => {
           setLogin(value);
-            console.log(login)
+          console.log(login);
         }}
       >
-        {({ handleSubmit, errors, touched }) => (
+        {({handleChange, handleSubmit, errors, touched }) => (
           <Form onSubmit={handleSubmit}>
+            <label>Nombre</label>
             <Field name="name" />
             {errors.name && touched.name ? <div>{errors.name}</div> : null}
+            <label>Contraseña</label>
             <Field name="password" />
             {errors.password && touched.password ? (
               <div>{errors.password}</div>
