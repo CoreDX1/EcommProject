@@ -5,6 +5,7 @@ import { Login } from "./Pages/Login/Login";
 import { Navbar } from "./Components/Navbar/NavBar";
 import { Quote } from "./Components/Quote/quote";
 import { NotFound } from "./Pages/NotFound";
+import { Register } from "./Pages/Login/Register";
 
 function App(): JSX.Element {
   return (
@@ -14,6 +15,7 @@ function App(): JSX.Element {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
         <Route path="*" element={<NotFound/>}/>
       </Routes>
     </>
