@@ -29,10 +29,15 @@ public class UsuarioController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> GetRegister(Register user)
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [Route("register")]
+    public async Task<dynamic> GetRegister([FromBody] Register user)
     {
         var data = await usuario.CreateUser(user);
-        return Ok(data);
+        if(data == null)
+            return new { success = false, message = "Usuario ya existe"};
+        return Ok(new { success = true, message = "Usuario creado"});
     }
 
     [HttpPost]

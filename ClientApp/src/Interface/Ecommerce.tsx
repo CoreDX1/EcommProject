@@ -32,10 +32,16 @@ interface Login {
   result: string;
 }
 
+interface Register{
+  success: boolean;
+  message : string;
+}
+
 export interface IEcommerse {
   category: Category;
   subcategory: SubCategory;
   imenuDinamic: IMenuDinamic;
   usuario: Usuario;
   login: Login;
+  register : Register;
 }

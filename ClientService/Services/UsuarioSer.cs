@@ -30,6 +30,12 @@ public class UsuarioSer : IUsuario<Usuario>
 
     public async Task<Usuario> CreateUser(Register add)
     {
+    //    SI El usuario Existe no se va a crear el Usuario
+    bool data = await dbpost.Usuarios.AnyAsync(x => x.name == add.name);
+    if (data){
+        return null;
+    } 
+    // Si el usuario no existe se va a crear el usuario
         Usuario user = new Usuario()
         {
             name = add.name,

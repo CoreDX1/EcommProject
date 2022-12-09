@@ -1,13 +1,11 @@
-import { Field, Form, Formik } from "formik";
+import { Form, Formik } from "formik";
 import "./_from.scss";
 import { useState } from "react";
 import { ListGet } from "../../Api/Menu";
 import { IEcommerse } from "../../Interface/Ecommerce";
-import { useNavigate } from "react-router-dom";
 
 export const Register = (): JSX.Element => {
-  const [login, setLogin] = useState<IEcommerse["login"]>();
-  const navigate = useNavigate();
+  const [register, setRegister] = useState<IEcommerse["register"]>();
 
   return (
     <div>
@@ -16,15 +14,14 @@ export const Register = (): JSX.Element => {
         onSubmit={async (value) => {
           try {
             const response = await ListGet.sesion.register(value);
-            setLogin(response);
-            if (response.success) {
-              navigate("/");
-            }
+            console.log(response);
+            setRegister(response);
           } catch (ex) {}
         }}
       >
         {({ handleChange, handleSubmit, errors, touched }) => (
           <Form onSubmit={handleSubmit}>
+            {register?.success ? <div>{register.message}</div> : <div>{register?.message}</div>}
             <label>Nombre</label>
             <input type="text" name="name" onChange={handleChange} />
             {errors.name && touched.name ? <div>{errors.name}</div> : null}

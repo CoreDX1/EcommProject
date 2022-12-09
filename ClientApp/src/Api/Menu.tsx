@@ -42,10 +42,10 @@ class Sesion {
     return data;
   };
 
-  public register = async (info: IEcommerse["usuario"]): Promise<IEcommerse["login"]> => {
+  public register = async (info: IEcommerse["usuario"]): Promise<IEcommerse["register"]> => {
     const { data } = await axios({
       method: "post",
-        url: `${this.root}/${this.url}`,
+        url: `${this.root}/${this.url}/register`,
       data: info,
     });
     return data;
