@@ -1,4 +1,6 @@
 @use "../../Components/Scss/font" as f;
+@use "../../Components/Scss/animacion" as a;
+
 
 main {
   max-width: 1200px;
@@ -26,6 +28,7 @@ main {
       &__item {
         padding: 2rem;
         list-style: none;
+
         .card {
           height: 22rem;
           background-color: white;
@@ -44,12 +47,11 @@ main {
           }
 
           &__imagen {
-              &:hover{
-                  // background-color: red;
-                  cursor:  pointer;
-                  transform: scale(1.1);
-                  transition: all 0.3s ease-in-out;
-              }
+           
+            &{
+              @include a.animacion-de-escala;
+            }
+
             img {
               height: 16rem;
               position: relative;
@@ -57,7 +59,7 @@ main {
           }
 
           &__content {
-            > h2 {
+            >h2 {
               text-decoration: none;
               font-weight: f.$font-weight;
             }

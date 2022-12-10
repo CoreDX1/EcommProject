@@ -22,10 +22,6 @@
       margin: 0 0 5px;
       text-align: left;
     }
-    .register__error{
-      color: red;
-      font-weight: 600;
-    }
     input {
       padding: 0.5rem;
       border: 1px solid rgb(182, 179, 179);
@@ -44,6 +40,11 @@
       &:hover{
         background-color: s.$button-hover-background-color ;
       }
+    }
+
+    .register__error{
+      color: red;
+      font-weight: 600;
     }
   }
 }

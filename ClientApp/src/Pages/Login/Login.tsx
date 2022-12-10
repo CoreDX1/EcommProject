@@ -25,7 +25,7 @@ export const Login = (): JSX.Element => {
         }}
       >
         {({ handleChange, handleSubmit}) => (
-          <Form className="form__formik" onSubmit={handleSubmit}>
+          <Form className="form__form" onSubmit={handleSubmit}>
             <label>Nombre</label>
             <input type="text" name="name" onChange={handleChange} />
             <label>Contraseña</label>
