@@ -3,6 +3,7 @@ import { IEcommerse } from "../../Interface/Ecommerce";
 import { ListGet } from "../../Api/Menu";
 
 import "./Navbar.scss";
+import { Link } from "react-router-dom";
 
 export const Navbar = (): JSX.Element => {
   const [get, setGet] = useState<IEcommerse["imenuDinamic"][]>([]);
@@ -68,9 +69,9 @@ export const Navbar = (): JSX.Element => {
             </li>
             <li className="nav__item nav__item--active">
               <img className="nav__logo" src="/user-solid.svg" alt="" />
-              <a className="nav__link" href="/login">
+              <Link className="nav__link" to="/login">
                 Inciar Sesion
-              </a>
+              </Link>
             </li>
           </ul>
         </nav>

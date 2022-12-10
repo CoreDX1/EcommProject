@@ -1,7 +1,6 @@
 @use '../../Components/Scss/sesion' as s;
-
-.form {
-  position: absolute;
+.register{
+   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
@@ -10,19 +9,22 @@
   background-color: white;
   border-radius: 10px;
   padding: 3.8rem;
-
-  .form__title {
+  .register__title{
     text-align: center;
     padding: 0 0 40px;
   }
 
-  .form__formik{
+  .register__form{
     display: flex;
     flex-direction: column;
     gap: 1rem;
     label{
       margin: 0 0 5px;
       text-align: left;
+    }
+    .register__error{
+      color: red;
+      font-weight: 600;
     }
     input {
       padding: 0.5rem;
@@ -33,7 +35,7 @@
         background-color: rgba(202, 202, 202, 0.212);
       }
     }
-    button{
+     button{
       padding: 0.5rem;
       border: 1px solid #ccc;
       border-radius: 5px;

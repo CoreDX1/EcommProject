@@ -3,7 +3,7 @@
 main {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 3rem 2rem;
+  padding: 2rem 1rem;
   height: auto;
 
   .title {
@@ -45,7 +45,10 @@ main {
 
           &__imagen {
               &:hover{
-                  background-color: red;
+                  // background-color: red;
+                  cursor:  pointer;
+                  transform: scale(1.1);
+                  transition: all 0.3s ease-in-out;
               }
             img {
               height: 16rem;

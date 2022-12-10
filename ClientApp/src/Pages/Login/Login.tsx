@@ -10,8 +10,9 @@ export const Login = (): JSX.Element => {
   const navigate = useNavigate();
 
   return (
-    <div>
-      <Formik
+    <div className="form">
+      <h1 className="form__title">Inciar Sesion</h1>
+      <Formik 
         initialValues={{ name: "", password: "" }}
         onSubmit={async (value) => {
           try {
@@ -23,16 +24,12 @@ export const Login = (): JSX.Element => {
           } catch (ex) {}
         }}
       >
-        {({ handleChange, handleSubmit, errors, touched }) => (
-          <Form onSubmit={handleSubmit}>
+        {({ handleChange, handleSubmit}) => (
+          <Form className="form__formik" onSubmit={handleSubmit}>
             <label>Nombre</label>
             <input type="text" name="name" onChange={handleChange} />
-            {errors.name && touched.name ? <div>{errors.name}</div> : null}
             <label>Contraseña</label>
             <input type="password" name="password" onChange={handleChange} />
-            {errors.password && touched.password ? (
-              <div>{errors.password}</div>
-            ) : null}
             <button type="submit">Login</button>
             <button type="button" onClick={() => navigate('/register')}>Register</button>
           </Form>
