@@ -13,7 +13,7 @@ export const Login = (): JSX.Element => {
     <div className="form">
       <h1 className="form__title">Inciar Sesion</h1>
       <Formik 
-        initialValues={{ name: "", password: "" }}
+        initialValues={{ email: "", password: "" }}
         onSubmit={async (value) => {
           try {
             const response = await ListGet.sesion.login(value);
@@ -26,8 +26,8 @@ export const Login = (): JSX.Element => {
       >
         {({ handleChange, handleSubmit}) => (
           <Form className="form__form" onSubmit={handleSubmit}>
-            <label>Nombre</label>
-            <input type="text" name="name" onChange={handleChange} />
+            <label>Correo Electronico</label>
+            <input type="email" name="email" onChange={handleChange} />
             <label>Contraseña</label>
             <input type="password" name="password" onChange={handleChange} />
             <button type="submit">Login</button>

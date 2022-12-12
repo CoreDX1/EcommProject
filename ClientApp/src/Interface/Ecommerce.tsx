@@ -17,7 +17,7 @@ interface IMenuDinamic {
 }
 
 interface Usuario {
-  name: string;
+  email: string;
   password: string;
 }
 
@@ -28,7 +28,7 @@ export interface CategoryApi<T> {
 interface Login {
   success: boolean;
   messsage: string;
-  usuarioApi: { id_user: number; name: string; password: string; rol: string };
+  usuarioApi: { id_user: number; username: string; email: string; password: string; rol: string };
   result: string;
 }
 
