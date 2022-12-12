@@ -16,23 +16,34 @@ interface IMenuDinamic {
   submenu: Array<string>;
 }
 
-interface Usuario {
-  email: string;
-  password: string;
-}
+// interface Usuario {
+//   email: string;
+//   password: string;
+// }
 
 export interface CategoryApi<T> {
   getAll: () => Promise<T[]>;
 }
 
-interface Login {
+interface LoginResponse {
   success: boolean;
   messsage: string;
   usuarioApi: { id_user: number; username: string; email: string; password: string; rol: string };
   result: string;
 }
 
-interface Register{
+interface LoginRequest {
+  email: string;
+  password: string;
+}
+
+interface RegisterRequest {
+  username: string;
+  email: string;
+  password: string;
+}
+
+interface RegisterResponse{
   success: boolean;
   message : string;
 }
@@ -41,7 +52,9 @@ export interface IEcommerse {
   category: Category;
   subcategory: SubCategory;
   imenuDinamic: IMenuDinamic;
-  usuario: Usuario;
-  login: Login;
-  register : Register;
+  // usuario: Usuario;
+  loginResponse : LoginResponse;
+  loginRequest : LoginRequest;
+  registerResponse : RegisterResponse;
+  registerRequest : RegisterRequest;
 }

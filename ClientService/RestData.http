@@ -30,7 +30,7 @@ POST {{hostname}}/{{urlU}}/{{register}}
 Content-Type: application/json
 
  {
-    "name": "juana421",
+    "username": "juana421asdf",
     "email": "chris@gmail.com",
     "password": "2312412"
  }
@@ -42,5 +42,5 @@ Content-Type: application/json
 
 {
   "email": "chris@gmail.com",
-  "password" : "1234"
+  "password" : "index"
 }

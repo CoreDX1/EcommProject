@@ -6,9 +6,12 @@ import { ListGet } from "../../Api/Menu";
 import { IEcommerse } from "../../Interface/Ecommerce";
 
 const SignupSchema = Yup.object().shape({
-  name: Yup.string()
+  username: Yup.string()
   .min(2, "Minimo de 2 caracteres")
   .max(20, "Maximo de 20 caracteres")
+  .required("Required"),
+  email : Yup.string()
+  .email("Invalid email")
   .required("Required"),
   password: Yup.string()
   .min(5, "Minimo de 5 caracteres")
@@ -17,13 +20,13 @@ const SignupSchema = Yup.object().shape({
 })
 
 export const Register = (): JSX.Element => {
-  const [register, setRegister] = useState<IEcommerse["register"]>();
+  const [register, setRegister] = useState<IEcommerse["registerResponse"]>();
 
   return (
     <div className="register">
       <h1 className="register__title">Registrarse</h1>
       <Formik
-        initialValues={{ name: "", password: "" }}
+        initialValues={{ email: "", password: "", username: "" }}
         validationSchema={SignupSchema}
         onSubmit={async (value) => {
           try {
@@ -37,8 +40,11 @@ export const Register = (): JSX.Element => {
           <Form className="register__form" onSubmit={handleSubmit}>
             {register?.success ? <div className="register__result">{register.message}</div> : <div className="register__result">{register?.message}</div>}
             <label>Nombre</label>
-            {errors.name && touched.name ? <div className="register__error">{errors.name}</div> : null}
-            <Field type="text" name="name" onChange={handleChange} />
+            {errors.username && touched.username ? <div className="register__error">{errors.username}</div> : null}
+            <Field type="text" name="username" onChange={handleChange} />
+            <label>Correo Electronico</label>
+            {errors.email && touched.email ? <div className="register__error">{errors.email}</div> : null}
+            <Field type="text" name="email" onChange={handleChange} />
             <label>Contraseña</label>
             {errors.password && touched.password ? (
               <div className="register__erro">{errors.password}</div>

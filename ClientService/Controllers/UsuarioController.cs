@@ -34,7 +34,7 @@ public class UsuarioController : Controller
     [Route("register")]
     public async Task<dynamic> GetRegister([FromBody] Register user)
     {
-        var data = await usuario.CreateUser(user);
+        Usuario data = await usuario.CreateUser(user);
         if(data == null)
             return new { success = false, message = "El Email ingresado existe"};
         return Ok(new { success = true, message = "Usuario creado"});
@@ -68,8 +68,8 @@ public class UsuarioController : Controller
             };
         }
 
-        var jwt = _configuration.GetSection("Jwt").Get<Jwt>();
-        var claims = new[]
+        Jwt jwt = _configuration.GetSection("Jwt").Get<Jwt>();
+        Claim[] claims = new[]
         {
             new Claim(JwtRegisteredClaimNames.Sub, jwt.Subject),
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
@@ -78,9 +78,9 @@ public class UsuarioController : Controller
             new Claim("email", usuarioApi.email),
         };
 
-        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwt.Key));
-        var singIn = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-        var token = new JwtSecurityToken(
+        SecurityKey key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwt.Key));
+        SigningCredentials singIn = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+        JwtSecurityToken token = new JwtSecurityToken(
             jwt.Issuer,
             jwt.Audience,
             claims,

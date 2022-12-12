@@ -6,7 +6,7 @@ import { IEcommerse } from "../../Interface/Ecommerce";
 import { useNavigate } from "react-router-dom";
 
 export const Login = (): JSX.Element => {
-  const [login, setLogin] = useState<IEcommerse["login"]>();
+  const [login, setLogin] = useState<IEcommerse["loginResponse"]>();
   const navigate = useNavigate();
 
   return (

@@ -32,20 +32,19 @@ public class UsuarioSer : IUsuario<Usuario>
     {
     //    SI El usuario Existe no se va a crear el Usuario
     var data = await dbpost.Usuarios
-        .Where(x => x.username == add.username)
+        .Where(x => x.email == add.email)
         .FirstOrDefaultAsync();
-    if (data == null){
-        return null;
-    } 
+    if (data != null) return null;
     // Si el usuario no existe se va a crear el usuario
         Usuario user = new Usuario()
         {
             username = add.username,
+            email = add.email,
             password = add.password,
-            rol = "empleado"
+            rol = "empleado",
         };
 
-        await dbpost.Usuarios.AddRangeAsync(user);
+        await dbpost.Usuarios.AddAsync(user);
         await dbpost.SaveChangesAsync();
         return user;
     }
