@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using ClientService.Interface;
 using EcommEntity.Models;
+using System.Net;
 
 namespace ClientService.Controllers;
 
@@ -16,9 +17,15 @@ public class MenuController : Controller
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetPrueba()
+    [ProducesResponseType(200), ProducesResponseType(404)]
+    [ProducesDefaultResponseType, Produces("application/json")]
+    public async Task<ActionResult<SubCategory>> GetPrueba()
     {
         var data = await menu.GetCategorySubCategory();
-        return Ok(data);
-    }
+        if(data != null) return StatusCode(200, data);
+        var resp = new HttpResponseMessage(HttpStatusCode.NotFound){
+            ReasonPhrase = "No hay datos"
+        };
+        return StatusCode(404, resp);
+    } 
 }

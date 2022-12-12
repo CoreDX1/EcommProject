@@ -18,3 +18,29 @@ Content-Type: application/json
 @urlP = Product
 GET {{hostname}}/{{urlP}}
 Content-Type: application/json
+
+### Usuarios GET
+@urlU = Usuario
+GET {{hostname}}/{{urlU}}
+Content-Type: application/json
+
+### Usuario Register POST
+@register = register
+POST {{hostname}}/{{urlU}}/{{register}}
+Content-Type: application/json
+
+ {
+    "name": "juana421",
+    "email": "chris@gmail.com",
+    "password": "2312412"
+ }
+
+### Usuario Login POST
+@login = token
+POSt {{hostname}}/{{urlU}}/{{login}}
+Content-Type: application/json
+
+{
+  "email": "chris@gmail.com",
+  "password" : "1234"
+}

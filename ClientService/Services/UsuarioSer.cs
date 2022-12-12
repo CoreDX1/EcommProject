@@ -20,10 +20,10 @@ public class UsuarioSer : IUsuario<Usuario>
         return data;
     }
 
-    public Usuario GetByUser(string username, string password)
+    public Usuario GetByUser(string email, string password)
     {
         var data = dbpost.Usuarios
-            .Where(x => x.name == username && x.password == password)
+            .Where(x => x.email == email && x.password == password)
             .FirstOrDefault();
         return data;
     }
@@ -31,14 +31,16 @@ public class UsuarioSer : IUsuario<Usuario>
     public async Task<Usuario> CreateUser(Register add)
     {
     //    SI El usuario Existe no se va a crear el Usuario
-    bool data = await dbpost.Usuarios.AnyAsync(x => x.name == add.name);
-    if (data){
+    var data = await dbpost.Usuarios
+        .Where(x => x.username == add.username)
+        .FirstOrDefaultAsync();
+    if (data == null){
         return null;
     } 
     // Si el usuario no existe se va a crear el usuario
         Usuario user = new Usuario()
         {
-            name = add.name,
+            username = add.username,
             password = add.password,
             rol = "empleado"
         };

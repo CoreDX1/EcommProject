@@ -36,7 +36,7 @@ public class UsuarioController : Controller
     {
         var data = await usuario.CreateUser(user);
         if(data == null)
-            return new { success = false, message = "Usuario ya existe"};
+            return new { success = false, message = "El Email ingresado existe"};
         return Ok(new { success = true, message = "Usuario creado"});
     }
 
@@ -44,12 +44,10 @@ public class UsuarioController : Controller
     [Route("login")]
     public dynamic login([FromBody] LoginUser user)
     {
-        Usuario data = usuario.GetByUser(user.name, user.password);
-        if (data == null)
-        {
-            return new { success = false, message = "Usuario no encontrado" };
-        }
-        return new { success = true, message = "Usuario encontrado" , data};
+        Usuario data = usuario.GetByUser(user.email, user.password);
+        if (data != null)  return new { success = true, message = "Usuario encontrado" , data};
+        return new { success = false, message = "El email ingresado existe" };
+        
     }
 
     [HttpPost]
@@ -57,9 +55,9 @@ public class UsuarioController : Controller
     public dynamic IniciarSesion([FromBody] Object optdata)
     {
         var data = JsonConvert.DeserializeObject<dynamic>(optdata.ToString());
-        string user = data.name.ToString();
+        string email = data.email.ToString();
         string password = data.password.ToString();
-        Usuario usuarioApi = usuario.GetByUser(user, password);
+        Usuario usuarioApi = usuario.GetByUser(email, password);
         if (usuarioApi == null)
         {
             return new
@@ -77,7 +75,7 @@ public class UsuarioController : Controller
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
             new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString()),
             new Claim("id", usuarioApi.id_user.ToString()),
-            new Claim("name", usuarioApi.name),
+            new Claim("email", usuarioApi.email),
         };
 
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwt.Key));

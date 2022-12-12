@@ -16,16 +16,24 @@ public class CategoryController : Controller
     }
 
     [HttpGet]
+    [ProducesResponseType(200)]
+    [ProducesResponseType(404)]
+    [ProducesDefaultResponseType, Produces("application/json")]
     public async Task<ActionResult<Category>> Get()
     {
-        var data = await category.Get();
-        return StatusCode(200, data);
+        List<Category> data = await category.Get();
+        if(data != null) return StatusCode(200, data);
+        return StatusCode(404, "No hay datos");
     }
 
     [HttpPost]
-    public async Task<ActionResult<Category>> Insert(Category form)
+    [ProducesResponseType(200)]
+    [ProducesResponseType(404)]
+    [ProducesDefaultResponseType, Produces("application/json")]
+    public async Task<ActionResult<Category>> Insert([FromBody] Category form)
     {
         Category data = await category.Insert(form);
-        return StatusCode(200, data);
+        if(data != null) StatusCode(200, data);
+        return StatusCode(404, "No se pudo insertar");
     }
 }
