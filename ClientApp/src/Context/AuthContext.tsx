@@ -18,7 +18,9 @@ type AuthContextType = {
 export const AuthContext = createContext({} as AuthContextType)
 
 export const AuthProvider = ({children} : Prop) => {
-  const [user, setUser] = useState<User | null>(null)
+  const [user, setUser] = useState<User | null>(
+    window.localStorage.getItem("user") ? JSON.parse(window.localStorage.getItem("user")!) : null
+  )
 
   const signIn = async (name :string, password : string) => {
     setUser({

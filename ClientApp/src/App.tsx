@@ -20,12 +20,24 @@ export interface User{
 
 function App(): JSX.Element {
   const {user,signIn , signOut} = useContext(AuthContext)
+
+  useEffect(() => {
+    const LocalStore = () => {
+      try{
+        window.localStorage.setItem("user", JSON.stringify(user));
+      }catch(e){
+        console.error(e)
+      }
+    }
+    LocalStore()
+  }, [user])
+
   console.log(user)
 
   return (
     <>
       <Quote />
-      <Navbar />
+      <Navbar sesion={user} />
         <Navibar/>
         {!user ? <h1>Usuario no logueado</h1> : <h1>Usuario logueado</h1>}
         {user ? <button onClick={signOut}>Cerrar sesión</button> : <button onClick={() => signIn("admin", "admin")}>Iniciar sesión</button> }

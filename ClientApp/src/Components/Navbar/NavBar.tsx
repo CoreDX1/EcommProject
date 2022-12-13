@@ -1,12 +1,19 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { IEcommerse } from "../../Interface/Ecommerce";
 import { ListGet } from "../../Api/Menu";
 
 import "./Navbar.scss";
 import { Link } from "react-router-dom";
+import { User } from "../../App";
+import { AuthContext } from "../../Context/AuthContext";
 
-export const Navbar = (): JSX.Element => {
+interface IProps {
+  sesion : User | null
+}
+
+export const Navbar = ({sesion}: IProps): JSX.Element => {
   const [get, setGet] = useState<IEcommerse["imenuDinamic"][]>([]);
+  const {signOut} = useContext(AuthContext)
 
   const GetSubCategory = async (): Promise<void> => {
     const get = await ListGet.menuDinamic.getAll();
@@ -67,12 +74,16 @@ export const Navbar = (): JSX.Element => {
                 Items
               </a>
             </li>
+            {
+              !sesion ? (
             <li className="nav__item nav__item--active">
               <img className="nav__logo" src="/user-solid.svg" alt="" />
               <Link className="nav__link" to="/login">
                 Inciar Sesion
               </Link>
             </li>
+              )
+             : <button onClick={() => signOut()}>Cerrar sesión</button>}
           </ul>
         </nav>
       </nav>

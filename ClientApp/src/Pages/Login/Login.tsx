@@ -19,7 +19,7 @@ export const Login = (): JSX.Element => {
             const response : IEcommerse["loginResponse"] = await ListGet.sesion.login(value);
             setLogin(response);
             if (response.success) {
-              navigate("/");
+              navigate("/loginUsuario");
             }
           } catch (ex) {}
         }}
