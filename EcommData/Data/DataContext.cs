@@ -12,6 +12,7 @@ public class DataContext : DbContext
     public DbSet<TypeProduct> TypeProducts { get; set; }
     public DbSet<Product> Products { get; set; }
     public DbSet<Usuario> Usuarios { get; set; }
+    public DbSet<Home> Homes { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -38,6 +39,11 @@ public class DataContext : DbContext
         builder.Entity<Usuario>(entity =>
         {
             entity.ToTable("usuarios").HasKey(p => p.id_user);
+        });
+
+        builder.Entity<Home>(entity =>
+        {
+            entity.ToTable("home").HasKey(p => p.id_home);
         });
 
         base.OnModelCreating(builder);

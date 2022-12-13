@@ -55,6 +55,7 @@ class Sesion {
 export const ListGet = {
   menuDinamic: new Menu<IEcommerse["imenuDinamic"]>("Menu"),
   usuario: new Menu<IEcommerse["registerResponse"]>("Usuario"),
+  home : new Menu<IEcommerse["home"]>("Home/GetHome"),
   // login: new Menu<IEcommerse["login"]>("Usuario"),
   sesion: new Sesion("Usuario"),
 };

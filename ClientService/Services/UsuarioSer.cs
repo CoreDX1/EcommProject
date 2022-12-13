@@ -1,3 +1,4 @@
+using ClientService.Domain.Validators;
 using ClientService.Interface;
 using EcommData.Data;
 using EcommEntity.Models;
@@ -20,22 +21,24 @@ public class UsuarioSer : IUsuario<Usuario>
         return data;
     }
 
-    public Usuario GetByUser(string email, string password)
+    public async Task<Usuario> GetByUser(string email, string password)
     {
-        var data = dbpost.Usuarios
+        Usuario data = await dbpost.Usuarios
             .Where(x => x.email == email && x.password == password)
-            .FirstOrDefault();
+            .FirstOrDefaultAsync();
         return data;
     }
 
     public async Task<Usuario> CreateUser(Register add)
     {
-    //    SI El usuario Existe no se va a crear el Usuario
+    // SI El Email Existe no se va a crear el Usuario
+    UsuarioRequestValidator.Validate(add);
+
     var data = await dbpost.Usuarios
         .Where(x => x.email == add.email)
         .FirstOrDefaultAsync();
     if (data != null) return null;
-    // Si el usuario no existe se va a crear el usuario
+    // Si el Email no existe se va a crear el usuario
         Usuario user = new Usuario()
         {
             username = add.username,

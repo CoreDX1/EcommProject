@@ -7,11 +7,11 @@ import { IEcommerse } from "../../Interface/Ecommerce";
 
 const SignupSchema = Yup.object().shape({
   username: Yup.string()
-  .min(2, "Minimo de 2 caracteres")
+  .min(5, "Minimo de 5 caracteres")
   .max(20, "Maximo de 20 caracteres")
   .required("Required"),
   email : Yup.string()
-  .email("Invalid email")
+  .email("email invalido")
   .required("Required"),
   password: Yup.string()
   .min(5, "Minimo de 5 caracteres")
@@ -47,7 +47,7 @@ export const Register = (): JSX.Element => {
             <Field type="text" name="email" onChange={handleChange} />
             <label>Contraseña</label>
             {errors.password && touched.password ? (
-              <div className="register__erro">{errors.password}</div>
+              <div className="register__error">{errors.password}</div>
             ) : null}
             <Field type="password" name="password" onChange={handleChange} />
             <button type="submit">Register</button>

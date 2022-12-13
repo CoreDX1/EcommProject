@@ -3,7 +3,7 @@
 
 
 main {
-  max-width: 1200px;
+  max-width: 1300px;
   margin: 0 auto;
   padding: 2rem 1rem;
   height: auto;
@@ -30,7 +30,7 @@ main {
         list-style: none;
 
         .card {
-          height: 22rem;
+          height: 23rem;
           background-color: white;
           border-radius: 0.55rem;
           box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
@@ -60,6 +60,7 @@ main {
 
           &__content {
             >h2 {
+              padding-top: 1rem;
               text-decoration: none;
               font-weight: f.$font-weight;
             }

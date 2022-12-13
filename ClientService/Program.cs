@@ -49,6 +49,7 @@ builder.Services.AddScoped<ITypeProduct<TypeProduct>, TypeProductSer>();
 builder.Services.AddScoped<IProduct<Product>, ProductSer>();
 builder.Services.AddScoped<IMenuDinamic, MenuDinamic>();
 builder.Services.AddScoped<IUsuario<Usuario>, UsuarioSer>();
+builder.Services.AddScoped<IHome<Home>, HomeSer>();
 
 builder.Services.AddDbContext<DataContext>(
     opt => opt.UseNpgsql(builder.Configuration.GetConnectionString("PostgresSQLConnection"))

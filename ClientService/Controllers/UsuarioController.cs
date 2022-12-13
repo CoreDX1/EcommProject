@@ -42,29 +42,29 @@ public class UsuarioController : Controller
 
     [HttpPost]
     [Route("login")]
-    public dynamic login([FromBody] LoginUser user)
+    public async Task<dynamic> login([FromBody] LoginUser user)
     {
-        Usuario data = usuario.GetByUser(user.email, user.password);
-        if (data != null)  return new { success = true, message = "Usuario encontrado" , data};
+        Usuario data = await usuario.GetByUser(user.email, user.password);
+        if (data != null) return new { success = true, message = "Usuario encontrado" , data};
         return new { success = false, message = "El email ingresado existe" };
         
     }
 
     [HttpPost]
     [Route("token")]
-    public dynamic IniciarSesion([FromBody] Object optdata)
+    public async Task<dynamic> IniciarSesion([FromBody] Object optdata)
     {
         var data = JsonConvert.DeserializeObject<dynamic>(optdata.ToString());
         string email = data.email.ToString();
         string password = data.password.ToString();
-        Usuario usuarioApi = usuario.GetByUser(email, password);
+        Usuario usuarioApi = await usuario.GetByUser(email, password);
         if (usuarioApi == null)
         {
             return new
             {
                 success = false,
                 message = "Credenciales incorrectas",
-                result = ""
+                result = "El Email o la contraseña son incorrectos"
             };
         }
 

@@ -26,6 +26,7 @@ export const Login = (): JSX.Element => {
       >
         {({ handleChange, handleSubmit}) => (
           <Form className="form__form" onSubmit={handleSubmit}>
+          {login ? <p className="login_error">{login.result}</p> : null}
             <label>Correo Electronico</label>
             <input type="email" name="email" onChange={handleChange} />
             <label>Contraseña</label>

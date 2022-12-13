@@ -36,7 +36,12 @@ interface LoginRequest {
   email: string;
   password: string;
 }
-
+interface IHome {
+  id_home: number;
+  title: string;
+  price: number;
+  image: string;
+}
 interface RegisterRequest {
   username: string;
   email: string;
@@ -57,4 +62,5 @@ export interface IEcommerse {
   loginRequest : LoginRequest;
   registerResponse : RegisterResponse;
   registerRequest : RegisterRequest;
+  home : IHome;
 }

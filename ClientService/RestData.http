@@ -30,9 +30,9 @@ POST {{hostname}}/{{urlU}}/{{register}}
 Content-Type: application/json
 
  {
-    "username": "juana421asdf",
-    "email": "chris@gmail.com",
-    "password": "2312412"
+    "username": "aa",
+    "email": "chrisaaaaaaaasdf@gmail.com",
+    "password": ""
  }
 
 ### Usuario Login POST

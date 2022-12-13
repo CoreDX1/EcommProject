@@ -1,27 +1,35 @@
 import "./Home.scss";
 import "./_cards.scss";
 
-import dataJson from "./products.json";
-
-interface Product {
-  id: number;
-  name: string;
-  price: number;
-  pathImange: string;
-}
+import { IEcommerse } from "../../Interface/Ecommerce";
+import { useEffect, useState } from "react";
+import { ListGet } from "../../Api/Menu";
 
 export const Home = (): JSX.Element => {
+  const [home , setHome] = useState<IEcommerse["home"][]>([]);
+
+  const GetHome = async () => {
+    const data = await ListGet.home.getAll();
+    setHome(data);
+  }
+
+  useEffect(() => {
+    GetHome();
+  }, []);
+
+  console.log(home);
+  
   const renderProduct = (): JSX.Element[] => {
-    return dataJson.map((item: Product): JSX.Element => {
+    return home.map((item): JSX.Element => {
       return (
-        <ul className="cards" key={item.id}>
+        <ul className="cards" key={item.id_home}>
           <li className="cards__item">
             <div className="card">
               <div className="card__imagen">
-                <img src={item.pathImange} />
+                <img src={item.image} />
               </div>
               <div className="card__content">
-                <h2 className="card__title">{item.name}</h2>
+                <h2 className="card__title">{item.title}</h2>
                 <h2 className="card__price">$ {item.price}</h2>
               </div>
             </div>
