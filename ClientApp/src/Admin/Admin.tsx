@@ -1,18 +1,14 @@
 import { Navigate } from 'react-router-dom'
+import { IEcommerse } from '../Interface/Ecommerce'
 
 interface Prop{
-  usuario : {
-     password : string,
-    name : string
-  }  | null
+  usuario : IEcommerse["loginResponse"] | null
 }
 
 export const Admin = ({usuario} : Prop): JSX.Element => {
   if(usuario == null) {
     return <Navigate to="/" />
   }
-
-  // console.log(usuario)
 
   return (
     <>

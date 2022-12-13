@@ -21,6 +21,7 @@ header {
     display: flex;
     align-items: center;
 
+
     ul.menu {
       display: flex;
 
@@ -154,6 +155,9 @@ header {
       flex : {
         direction: row;
       }
+    .nav__signout{
+      height: 1.8rem;
+    }
 
       &__item {
         list-style: none;

@@ -8,45 +8,25 @@ import { NotFound } from "./Pages/NotFound";
 import { Register } from "./Pages/Login/Register";
 import { Admin } from "./Admin/Admin";
 import { Navibar } from "./Components/Navigate/Navigate";
-import { useContext, useEffect} from "react";
+import { useContext} from "react";
 import { AuthContext } from "./Context/AuthContext";
 import { LoginUsuario } from "./Components/Navigate/LoginUsuario";
 
-
-export interface User{
-  password : string,
-  name : string
-}
-
 function App(): JSX.Element {
-  const {user,signIn , signOut} = useContext(AuthContext)
-
-  useEffect(() => {
-    const LocalStore = () => {
-      try{
-        window.localStorage.setItem("user", JSON.stringify(user));
-      }catch(e){
-        console.error(e)
-      }
-    }
-    LocalStore()
-  }, [user])
-
-  console.log(user)
-
+  const {login} = useContext(AuthContext)
   return (
     <>
       <Quote />
-      <Navbar sesion={user} />
-        <Navibar/>
-        {!user ? <h1>Usuario no logueado</h1> : <h1>Usuario logueado</h1>}
-        {user ? <button onClick={signOut}>Cerrar sesión</button> : <button onClick={() => signIn("admin", "admin")}>Iniciar sesión</button> }
+      <Navbar sesion={login} />
+      {
+        login?.result ? <Navibar/> : null
+      }
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/loginUsuario" element={<LoginUsuario />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/admin" element={<Admin usuario={user}/>} />
+          <Route path="/admin" element={<Admin usuario={login}/>} />
           <Route path="*" element={<NotFound />} />
         </Routes>
     </>

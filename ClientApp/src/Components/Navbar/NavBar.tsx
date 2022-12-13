@@ -4,16 +4,15 @@ import { ListGet } from "../../Api/Menu";
 
 import "./Navbar.scss";
 import { Link } from "react-router-dom";
-import { User } from "../../App";
 import { AuthContext } from "../../Context/AuthContext";
 
 interface IProps {
-  sesion : User | null
+  sesion: IEcommerse["loginResponse"] | null;
 }
 
-export const Navbar = ({sesion}: IProps): JSX.Element => {
+export const Navbar = ({ sesion }: IProps): JSX.Element => {
   const [get, setGet] = useState<IEcommerse["imenuDinamic"][]>([]);
-  const {signOut} = useContext(AuthContext)
+  const { login, signOut } = useContext(AuthContext);
 
   const GetSubCategory = async (): Promise<void> => {
     const get = await ListGet.menuDinamic.getAll();
@@ -32,18 +31,20 @@ export const Navbar = ({sesion}: IProps): JSX.Element => {
             logo
           </Link>
           <ul className="menu">
-            {get.map((item : IEcommerse["imenuDinamic"]): JSX.Element => {
+            {get.map((item: IEcommerse["imenuDinamic"]): JSX.Element => {
               return (
                 <li className="dropdown" key={item.id_category}>
                   <a href="">{item.name}</a>
                   <ul className="dropdown-menu">
-                    {item.submenu.map((x : string, index : number) : JSX.Element => {
-                      return (
-                        <li key={index}>
-                          <a href="">{x}</a>
-                        </li>
-                      );
-                    })}
+                    {item.submenu.map(
+                      (x: string, index: number): JSX.Element => {
+                        return (
+                          <li key={index}>
+                            <a href="">{x}</a>
+                          </li>
+                        );
+                      }
+                    )}
                   </ul>
                 </li>
               );
@@ -74,16 +75,16 @@ export const Navbar = ({sesion}: IProps): JSX.Element => {
                 Items
               </a>
             </li>
-            {
-              !sesion ? (
-            <li className="nav__item nav__item--active">
-              <img className="nav__logo" src="/user-solid.svg" alt="" />
-              <Link className="nav__link" to="/login">
-                Inciar Sesion
-              </Link>
-            </li>
-              )
-             : <button onClick={() => signOut()}>Cerrar sesión</button>}
+            {login ? (
+              <button className="nav__signout" onClick={() => signOut()}>Cerrar Sesion</button>
+            ) : (
+              <li className="nav__item nav__item--active">
+                <img className="nav__logo" src="/user-solid.svg" alt="" />
+                <Link className="nav__link" to="/login">
+                  Inciar Sesion
+                </Link>
+              </li>
+            )}
           </ul>
         </nav>
       </nav>
