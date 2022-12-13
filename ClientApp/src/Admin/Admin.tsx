@@ -1,4 +1,10 @@
+import {useAuth} from '../Context/AuthContext'
+
 export const Admin = (): JSX.Element => {
+
+  const {signup} = useAuth()
+  console.log(signup)
+
   return (
     <>
     <div>
