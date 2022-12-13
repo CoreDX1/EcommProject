@@ -1,32 +1,41 @@
-import {createContext, useContext} from 'react';
+import {createContext, useState} from 'react';
+import { User } from '../App';
 
 interface Prop{
   children: JSX.Element | JSX.Element[]
 }
 
-interface Sesion{
-  signup : Array<{
-    email : string,
-    password : string
-  }>
+type AuthContextType = {
+  user: User | null,
+  signIn: (name :string, password : string) => Promise<void>
+  signOut: () => Promise<void>
+  data : {
+    user: User | null,
+    setUser: (user : User | null) => void
+  }
 }
 
-export const AuthContext = createContext({})
+export const AuthContext = createContext({} as AuthContextType)
 
-export const useAuth = () => {
-  const context = useContext(AuthContext) as Sesion
-  if(!context) throw new Error('There is no context')
-  return context
-}
+export const AuthProvider = ({children} : Prop) => {
+  const [user, setUser] = useState<User | null>(null)
 
-export const AuthProvider = ({children}: Prop) => {
-
-  const signup = (email : string , password : string) => {
-    console.log(email, password)
+  const signIn = async (name :string, password : string) => {
+    setUser({
+      name,
+      password
+    })
+  }
+  const signOut = async () => {
+    setUser(null)
   }
 
+  const data = {
+    user,
+    setUser 
+  }
   return (
-    <AuthContext.Provider value={{signup}}>
+    <AuthContext.Provider value={{user, signIn , signOut, data}}>
       {children}
     </AuthContext.Provider>
   )

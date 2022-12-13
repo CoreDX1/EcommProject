@@ -1,9 +1,18 @@
-import {useAuth} from '../Context/AuthContext'
+import { Navigate } from 'react-router-dom'
 
-export const Admin = (): JSX.Element => {
+interface Prop{
+  usuario : {
+     password : string,
+    name : string
+  }  | null
+}
 
-  const {signup} = useAuth()
-  console.log(signup)
+export const Admin = ({usuario} : Prop): JSX.Element => {
+  if(usuario == null) {
+    return <Navigate to="/" />
+  }
+
+  // console.log(usuario)
 
   return (
     <>

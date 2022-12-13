@@ -16,7 +16,7 @@ export const Login = (): JSX.Element => {
         initialValues={{ email: "", password: "" }}
         onSubmit={async (value) => {
           try {
-            const response = await ListGet.sesion.login(value);
+            const response : IEcommerse["loginResponse"] = await ListGet.sesion.login(value);
             setLogin(response);
             if (response.success) {
               navigate("/");

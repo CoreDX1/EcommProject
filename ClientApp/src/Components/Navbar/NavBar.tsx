@@ -21,9 +21,9 @@ export const Navbar = (): JSX.Element => {
     <header>
       <nav className="menu-bar">
         <div className="menu-1">
-          <a className="menu__logo" href="/">
+          <Link className="menu__logo" to="/">
             logo
-          </a>
+          </Link>
           <ul className="menu">
             {get.map((item : IEcommerse["imenuDinamic"]): JSX.Element => {
               return (
