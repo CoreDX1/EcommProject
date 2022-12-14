@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react'
+import { ListGet } from '../Api/Menu'
 import { IEcommerse } from '../Interface/Ecommerce'
 
 interface Prop {
@@ -7,6 +8,7 @@ interface Prop {
 
 type AuthContextType = {
     login: IEcommerse['loginResponse'] | null
+    home : IEcommerse["home"][]
     signIn: (formUser: IEcommerse['loginResponse']) => Promise<void>
     signOut: () => Promise<void>
 }
@@ -48,8 +50,21 @@ export const AuthProvider = ({ children }: Prop) => {
         setLogin(null)
     }
 
+    // Get Products para el home
+
+  const [home , setHome] = useState<IEcommerse["home"][]>([]);
+
+  const GetHome = async () => {
+    const data = await ListGet.home.getAll();
+    setHome(data);
+  }
+
+  useEffect(() => {
+    GetHome();
+  }, []);
+
     return (
-        <AuthContext.Provider value={{ signIn, signOut, login }}>
+        <AuthContext.Provider value={{ signIn, signOut, login, home }}>
             {children}
         </AuthContext.Provider>
     )

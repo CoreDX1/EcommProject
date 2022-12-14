@@ -1,26 +1,14 @@
 import "./Home.scss";
 import "./_cards.scss";
-
-import { IEcommerse } from "../../Interface/Ecommerce";
-import { useEffect, useState } from "react";
-import { ListGet } from "../../Api/Menu";
+import { Link } from "react-router-dom";
+import { useAuth } from "../../Context/AuthContext";
 
 export const Home = (): JSX.Element => {
-  const [home , setHome] = useState<IEcommerse["home"][]>([]);
+  const {home} = useAuth();
 
-  const GetHome = async () => {
-    const data = await ListGet.home.getAll();
-    setHome(data);
-  }
-
-  useEffect(() => {
-    GetHome();
-  }, []);
-
-  console.log(home);
-  
   const renderProduct = (): JSX.Element[] => {
     return home.map((item): JSX.Element => {
+      const urldynamic = item.title.replace(/\s/g, "-");
       return (
         <ul className="cards" key={item.id_home}>
           <li className="cards__item">
@@ -30,6 +18,9 @@ export const Home = (): JSX.Element => {
               </div>
               <div className="card__content">
                 <h2 className="card__title">{item.title}</h2>
+                <div>
+                  <Link to={`/${item.id_home}-${urldynamic}`} > Ver mas</Link>
+                </div>
                 <h2 className="card__price">$ {item.price}</h2>
               </div>
             </div>

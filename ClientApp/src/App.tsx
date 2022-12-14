@@ -10,6 +10,7 @@ import { Admin } from './Admin/Admin'
 import { Navibar } from './Components/Navigate/Navigate'
 import { useAuth } from './Context/AuthContext'
 import { LoginUsuario } from './Components/Navigate/LoginUsuario'
+import { SoloProduts } from './Components/SoloProduts/SoloProduts'
 
 function App(): JSX.Element {
     const { login } = useAuth()
@@ -20,6 +21,7 @@ function App(): JSX.Element {
             {login?.result ? <Navibar /> : null}
             <Routes>
                 <Route path="/" element={<Home />} />
+                <Route path="/:id" element={<SoloProduts />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/loginUsuario" element={<LoginUsuario />} />
                 <Route path="/register" element={<Register />} />

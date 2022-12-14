@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from 'axios'
+import axios from 'axios'
 import { CategoryApi, IEcommerse, IHomeID } from '../Interface/Ecommerce'
 
 class Menu<T> implements CategoryApi<T> {
@@ -9,8 +9,8 @@ class Menu<T> implements CategoryApi<T> {
         this.url = url
     }
 
-    public getAll: () => Promise<T[]> = async (): Promise<T[]> => {
-        const { data }: AxiosResponse<T[]> = await axios.get(
+    public getAll= async () => {
+        const { data } = await axios.get<T[]>(
             `${this.root}/${this.url}`
         )
         return data
@@ -63,10 +63,11 @@ class Home {
         const { data } = await axios({
             method: 'delete',
             url: `${this.root}/${this.url}`,
-            data: form,
             headers: {
-                "Authorization": `Bearer ${window.localStorage.getItem('token')}`
-            }
+                responseType: 'application/json',
+                Authorization: `Bearer ${window.localStorage.getItem('token')}`
+            },
+            data: form,
         })
         return data
     }

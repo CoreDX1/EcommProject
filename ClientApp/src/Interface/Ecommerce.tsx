@@ -68,3 +68,8 @@ export interface IEcommerse {
   registerRequest : RegisterRequest;
   home : IHome;
 }
+
+export interface ISesion<T,U>{
+   login: (info: T) => Promise<U>
+
+}

@@ -2,11 +2,11 @@ import { useEffect, useState } from 'react'
 import { Navigate } from 'react-router-dom'
 import { ListGet } from '../Api/Menu'
 import { useAuth } from '../Context/AuthContext'
-import { IEcommerse} from '../Interface/Ecommerce'
+import { IEcommerse } from '../Interface/Ecommerce'
 
 export const Admin = (): JSX.Element => {
     const { login } = useAuth()
-    const rol = login?.usuarioApi.rol.includes('admin') as boolean
+    const rol = !!login?.usuarioApi.rol.includes('admin')
 
     if (!rol) {
         return <Navigate to="/" />
@@ -20,12 +20,16 @@ export const Admin = (): JSX.Element => {
     }
 
     const handDelete = async (button: number) => {
-        const test = await ListGet.homeDelete.deleteToke(
-            {
+        try {
+            const axiosDelete = await ListGet.homeDelete.deleteToke({
                 id_home: button,
-            },
-        )
-        console.log(test)
+            })
+            if (axiosDelete.success) {
+                GetHome()
+            }
+        } catch (ex) {
+            console.log(ex)
+        }
     }
 
     useEffect(() => {
@@ -34,6 +38,7 @@ export const Admin = (): JSX.Element => {
 
     return (
         <div>
+            <div></div>
             <table>
                 <thead>
                     <tr>
