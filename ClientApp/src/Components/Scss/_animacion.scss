@@ -1,11 +1,11 @@
- @mixin animacion-de-escala {
-   &:hover {
-     // background-color: red;
-     cursor: pointer;
-     transform: scale(1.1);
-     transition: all 0.8s ease-in-out;
-   }
+@mixin animacion-de-escala {
+    &:hover {
+        // background-color: red;
+        cursor: pointer;
+        transform: scale(1.1);
+        transition: all 0.8s ease-in-out;
+    }
 
-   transform: scale(1);
-   transition: all 0.8s ease-in-out;
- }
+    transform: scale(1);
+    transition: all 0.8s ease-in-out;
+}

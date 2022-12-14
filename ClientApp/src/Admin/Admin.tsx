@@ -1,19 +1,50 @@
-import { Navigate } from "react-router-dom";
-import {  useAuth } from "../Context/AuthContext";
+import { useEffect, useState } from 'react'
+import { Navigate } from 'react-router-dom'
+import { ListGet } from '../Api/Menu'
+import { useAuth } from '../Context/AuthContext'
+import { IEcommerse } from '../Interface/Ecommerce'
 
 export const Admin = (): JSX.Element => {
-  const { login } = useAuth();
-  const rol = login?.usuarioApi.rol.includes("admin") as boolean;
+    const { login } = useAuth()
+    const rol = login?.usuarioApi.rol.includes('admin') as boolean
+    const [products, setProducts] = useState<IEcommerse['home'][]>([])
 
-  if (!rol) {
-    return <Navigate to="/" />;
-  }
-  return (
-    <>
-      <div>
-        <h1>Admin</h1>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam</p>
-      </div>
-    </>
-  );
-};
+    const GetHome = async () => {
+        const data = await ListGet.home.getAll()
+        setProducts(data)
+    }
+
+    useEffect(() => {
+        GetHome()
+    }, [])
+
+    if (!rol) {
+        return <Navigate to="/" />
+    }
+
+    return (
+        <div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>price</th>
+                        <th>Accion</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {products.map((item) => (
+                        <tr key={item.id_home}>
+                            <td>{item.title}</td>
+                            <td>{item.price}</td>
+                            <td>
+                                <button>Editar</button>
+                                <button>Eliminar</button>
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </div>
+    )
+}
