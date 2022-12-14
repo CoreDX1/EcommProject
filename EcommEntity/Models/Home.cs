@@ -12,3 +12,7 @@ public class CreateProduct{
     public int price { get; set; }
     public string? image { get; set; }
 }
+
+public class DeleteID {
+    public int id_home { get; set; }
+}
