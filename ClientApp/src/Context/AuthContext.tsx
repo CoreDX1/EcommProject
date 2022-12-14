@@ -1,45 +1,55 @@
-import {createContext, useEffect, useState} from 'react';
-import { IEcommerse } from '../Interface/Ecommerce';
+import { createContext, useContext, useEffect, useState } from "react";
+import { IEcommerse } from "../Interface/Ecommerce";
 
-interface Prop{
-  children: JSX.Element | JSX.Element[]
+interface Prop {
+  children: JSX.Element | JSX.Element[];
 }
 
 type AuthContextType = {
-  login : IEcommerse["loginResponse"] | null,
-  signIn: (formUser : IEcommerse["loginResponse"]) => Promise<void>,
-  signOut: () => Promise<void>
-}
+  login: IEcommerse["loginResponse"] | null;
+  signIn: (formUser: IEcommerse["loginResponse"]) => Promise<void>;
+  signOut: () => Promise<void>;
+};
 
-export const AuthContext = createContext({} as AuthContextType)
+const AuthContext = createContext({} as AuthContextType);
 
-export const AuthProvider = ({children} : Prop) => {
+export const useAuth = () => {
+    const context = useContext(AuthContext);
+    if (!context) throw new Error("useAuth must be used within an AuthProvider");
+    return context;
+};
+
+export const AuthProvider = ({ children }: Prop) => {
   // const [user, setUser] = useState<User | null>(
-  //   window.localStorage.getItem("user") ? JSON.parse(window.localStorage.getItem("user")!) : null
+  // window.localStorage.getItem("user") ? JSON.parse(window.localStorage.getItem("user")!) : null
   // )
   const [login, setLogin] = useState<IEcommerse["loginResponse"] | null>(
-    window.localStorage.getItem("login") ? JSON.parse(window.localStorage.getItem("login")!) : null
+    window.localStorage.getItem("login")
+      ? JSON.parse(window.localStorage.getItem("login")!)
+      : null
   );
- useEffect(() => {
+  useEffect(() => {
     const LocalStore = () => {
-      try{
+      try {
         window.localStorage.setItem("login", JSON.stringify(login));
-      }catch(e){
-        console.error(e)
+      } catch (e) {
+        console.error(e);
       }
-    }
-    LocalStore()
-  }, [login])
-  const signIn = async (formUser : IEcommerse["loginResponse"]) => {
-    setLogin(formUser)
-  }
+    };
+    LocalStore();
+  }, [login]);
+
+  const signIn = async (formUser: IEcommerse["loginResponse"]) => {
+    setLogin(formUser);
+  };
+
   const signOut = async () => {
-    setLogin(null)
-  }
+    setLogin(null);
+  };
+
   return (
-    <AuthContext.Provider value={{signIn , signOut,  login}}>
+    <AuthContext.Provider value={{ signIn, signOut, login }}>
       {children}
     </AuthContext.Provider>
-  )
-
-}
+  );
+};

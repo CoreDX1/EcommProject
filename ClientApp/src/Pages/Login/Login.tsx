@@ -1,15 +1,15 @@
 import { Form, Formik } from "formik";
 import "./_from.scss";
-import { useContext} from "react";
 import { ListGet } from "../../Api/Menu";
 import { IEcommerse } from "../../Interface/Ecommerce";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../../Context/AuthContext";
+import { useAuth } from "../../Context/AuthContext";
 
 export const Login = (): JSX.Element => {
   // const [login, setLogin] = useState<IEcommerse["loginResponse"]>();
   const navigate = useNavigate();
-  const {login,signIn} = useContext(AuthContext)
+
+  const {login,signIn} = useAuth();
 
   return (
     <div className="form">
@@ -22,7 +22,12 @@ export const Login = (): JSX.Element => {
             const response : IEcommerse["loginResponse"] = await ListGet.sesion.login(value);
             signIn(response);
             if (response.success) {
-              navigate("/loginUsuario");
+                const rol = response.usuarioApi.rol.includes("admin") as boolean;
+                if (rol) {
+                    navigate("/admin");
+                } else {
+                    navigate("/");
+                }
             }
           } catch (ex) {}
         }}
