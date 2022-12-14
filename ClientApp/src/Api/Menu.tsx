@@ -19,7 +19,7 @@ class Menu<T> implements CategoryApi<T> {
   public post = async (info: IEcommerse["loginResponse"]): Promise<T> => {
     const { data } = await axios({
       method: "post",
-        url: `${this.root}/${this.url}/token`,
+      url: `${this.root}/${this.url}/token`,
       data: info,
     });
     return data;
@@ -36,7 +36,7 @@ class Sesion {
   public login = async (info: IEcommerse["loginRequest"]) => {
     const { data } = await axios({
       method: "post",
-        url: `${this.root}/${this.url}/token`,
+      url: `${this.root}/${this.url}/token`,
       data: info,
     });
     return data;
@@ -45,17 +45,16 @@ class Sesion {
   public register = async (info: IEcommerse["registerRequest"]) => {
     const { data } = await axios({
       method: "post",
-        url: `${this.root}/${this.url}/register`,
+      url: `${this.root}/${this.url}/register`,
       data: info,
     });
     return data;
-  }
+  };
 }
 
 export const ListGet = {
   menuDinamic: new Menu<IEcommerse["imenuDinamic"]>("Menu"),
   usuario: new Menu<IEcommerse["registerResponse"]>("Usuario"),
-  home : new Menu<IEcommerse["home"]>("Home/GetHome"),
-  // login: new Menu<IEcommerse["login"]>("Usuario"),
+  home: new Menu<IEcommerse["home"]>("Home/GetHome"),
   sesion: new Sesion("Usuario"),
 };

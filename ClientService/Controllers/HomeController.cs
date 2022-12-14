@@ -22,4 +22,13 @@ public class HomeController : Controller
         if(data != null) return StatusCode(200, data);
         return StatusCode(404, "No hay datos");
     }
+
+    [HttpPost]
+    [Route("InsertProducts")]
+    public async Task<ActionResult<Home>> Post(CreateProduct add)
+    {
+        var data = await _homeSer.InsertProducts(add);
+        if(data != null) return StatusCode(200, data);
+        return StatusCode(404, "No se pudo insertar");
+    }
 }

@@ -18,4 +18,17 @@ public class HomeSer : IHome<Home>
         var data = await dbpost.Homes.ToListAsync();
         return data;
     }
+
+    public async Task<Home> InsertProducts(CreateProduct add)
+    {
+        Home data = new Home()
+        {
+            title = add.title,
+            image = add.image,
+            price = add.price
+        };
+        await dbpost.Homes.AddAsync(data);
+        await dbpost.SaveChangesAsync();
+        return data;
+    }
 }
