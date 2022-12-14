@@ -42,6 +42,10 @@ interface IHome {
   price: number;
   image: string;
 }
+export interface IHomeID{
+    id_home: number | null;
+}
+
 interface RegisterRequest {
   username: string;
   email: string;

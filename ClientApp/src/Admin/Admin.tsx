@@ -2,11 +2,16 @@ import { useEffect, useState } from 'react'
 import { Navigate } from 'react-router-dom'
 import { ListGet } from '../Api/Menu'
 import { useAuth } from '../Context/AuthContext'
-import { IEcommerse } from '../Interface/Ecommerce'
+import { IEcommerse} from '../Interface/Ecommerce'
 
 export const Admin = (): JSX.Element => {
     const { login } = useAuth()
     const rol = login?.usuarioApi.rol.includes('admin') as boolean
+
+    if (!rol) {
+        return <Navigate to="/" />
+    }
+
     const [products, setProducts] = useState<IEcommerse['home'][]>([])
 
     const GetHome = async () => {
@@ -14,13 +19,18 @@ export const Admin = (): JSX.Element => {
         setProducts(data)
     }
 
+    const handDelete = async (button: number) => {
+        const test = await ListGet.homeDelete.deleteToke(
+            {
+                id_home: button,
+            },
+        )
+        console.log(test)
+    }
+
     useEffect(() => {
         GetHome()
     }, [])
-
-    if (!rol) {
-        return <Navigate to="/" />
-    }
 
     return (
         <div>
@@ -39,7 +49,11 @@ export const Admin = (): JSX.Element => {
                             <td>{item.price}</td>
                             <td>
                                 <button>Editar</button>
-                                <button>Eliminar</button>
+                                <button
+                                    onClick={() => handDelete(item.id_home)}
+                                >
+                                    Eliminar
+                                </button>
                             </td>
                         </tr>
                     ))}
