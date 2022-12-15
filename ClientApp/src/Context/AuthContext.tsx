@@ -1,15 +1,15 @@
 import { createContext, useContext, useEffect, useState } from 'react'
 import { ListGet } from '../Api/Menu'
-import { IEcommerse } from '../Interface/Ecommerce'
+import { IEcommerse,  ISesionAuth } from '../Interface/Ecommerce'
 
 interface Prop {
     children: JSX.Element | JSX.Element[]
 }
 
 type AuthContextType = {
-    login: IEcommerse['loginResponse'] | null
+    login: ISesionAuth['loginResponse'] | null
     home : IEcommerse["home"][]
-    signIn: (formUser: IEcommerse['loginResponse']) => Promise<void>
+    signIn: (formUser: ISesionAuth['loginResponse']) => Promise<void>
     signOut: () => Promise<void>
 }
 
@@ -25,7 +25,7 @@ export const AuthProvider = ({ children }: Prop) => {
     // const [user, setUser] = useState<User | null>(
     // window.localStorage.getItem("user") ? JSON.parse(window.localStorage.getItem("user")!) : null
     // )
-    const [login, setLogin] = useState<IEcommerse['loginResponse'] | null>(
+    const [login, setLogin] = useState<ISesionAuth['loginResponse'] | null>(
         window.localStorage.getItem('login')
             ? JSON.parse(window.localStorage.getItem('login')!)
             : null
@@ -42,7 +42,7 @@ export const AuthProvider = ({ children }: Prop) => {
         LocalStore()
     }, [login])
 
-    const signIn = async (formUser: IEcommerse['loginResponse']) => {
+    const signIn = async (formUser: ISesionAuth['loginResponse']) => {
         setLogin(formUser)
     }
 

@@ -1,3 +1,4 @@
+import { Form, Formik } from 'formik'
 import { useEffect, useState } from 'react'
 import { Navigate } from 'react-router-dom'
 import { ListGet } from '../Api/Menu'
@@ -38,7 +39,50 @@ export const Admin = (): JSX.Element => {
 
     return (
         <div>
-            <div></div>
+            <div>
+            <Formik
+                initialValues={{ title: '', price: 0, image: '' }}
+                onSubmit={ async (values) => {
+                    try {
+                        const data = await ListGet.postHome.post(values)
+                        if (data.success) {
+                            GetHome()
+                        }
+                    }catch(ex){
+                        console.log(ex)
+                    }
+                }}
+            >
+                {({ handleChange, handleSubmit}) => (
+                    <Form className="form__form" onSubmit={handleSubmit}>
+                        <label>Title</label>
+                        <input
+                            type="text"
+                            name="title"
+                            onChange={handleChange}
+                        />
+                        <label>Price</label>
+                        <input
+                            type="text"
+                            name="price"
+                            onChange={handleChange}
+                        />
+
+                        <label>Image</label>
+                        <input
+                            type="file"
+                            name="Image"
+                            onChange={handleChange}
+                        />
+                        <button
+                    type="submit"
+                        >
+                            Guardar
+                        </button>
+                    </Form>
+                )}
+            </Formik>
+            </div>
             <table>
                 <thead>
                     <tr>
