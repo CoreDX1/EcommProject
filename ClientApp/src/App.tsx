@@ -7,13 +7,10 @@ import { Quote } from './Components/Quote/quote'
 import { NotFound } from './Pages/NotFound'
 import { Register } from './Pages/Login/Register'
 import { Admin } from './Admin/Admin'
-import { Navibar } from './Components/Navigate/Navigate'
-import { useAuth } from './Context/AuthContext'
-import { LoginUsuario } from './Components/Navigate/LoginUsuario'
 import { SoloProduts } from './Components/SoloProduts/SoloProduts'
+import { LoginUsuario } from './Components/Navigate/LoginUsuario'
 
 function App(): JSX.Element {
-    // const { login } = useAuth()
     return (
         <>
             <Quote />

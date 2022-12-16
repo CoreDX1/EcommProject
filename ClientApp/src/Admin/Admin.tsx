@@ -20,7 +20,7 @@ export const Admin = (): JSX.Element => {
         setProducts(data);
     };
 
-    const handDelete = async (button: number) => {
+    const handDelete = async (button: number): Promise<void> => {
         try {
             const axiosDelete = await ListGet.homeDelete.deleteToke({
                 id_home: button,
@@ -39,7 +39,7 @@ export const Admin = (): JSX.Element => {
         image: string;
     }
 
-    const ValidateValue = ({ image, price, title }: Ivalue) => {
+    const ValidateValue = ({ image, price, title }: Ivalue): boolean => {
         if (image.length == 0) {
             throw new Error('La imagen no puede estar vacia');
         }
@@ -67,7 +67,9 @@ export const Admin = (): JSX.Element => {
                     onSubmit={async values => {
                         try {
                             ValidateValue(values) ? alert('Todo bien') : null;
-                            const response = await ListGet.postHome.post(values)
+                            const response = await ListGet.postHome.post(
+                                values
+                            );
                             if (response.success) {
                                 alert('Todo bien');
                             }

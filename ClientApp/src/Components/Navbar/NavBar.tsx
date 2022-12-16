@@ -19,7 +19,7 @@ export const Navbar = (): JSX.Element => {
         setGet(get);
     };
 
-    const test = () => {
+    const test = ()  : JSX.Element | null  => {
     const admin = login?.usuarioApi.rol.includes('admin') as boolean;
     if (admin) {
         return <Link to='/admin'>Admin</Link>;
