@@ -30,32 +30,6 @@ class Menu<T> implements CategoryApi<T> {
     };
 }
 
-class Sesion<T, U> implements ISesion<T, U> {
-    private root: string = 'http://localhost:5020/api';
-    private url: string = 'Usuario';
-    constructor(url: string) {
-        this.url = url;
-    }
-
-    public login = async (info: T) => {
-        const { data } = await axios<U>({
-            method: 'post',
-            url: `${this.root}/${this.url}/token`,
-            data: info,
-        });
-        return data;
-    };
-
-    public register = async (info: T) => {
-        const { data } = await axios<U>({
-            method: 'post',
-            url: `${this.root}/${this.url}/register`,
-            data: info,
-        });
-        return data;
-    };
-}
-
 class Home {
     private root: string = 'http://localhost:5020/api/Home';
     private url: string = 'DeleteProducts';
@@ -85,15 +59,43 @@ class Home {
         return data;
     };
 }
+class Sesion<T, U> implements ISesion<T, U> {
+    private root: string = 'http://localhost:5020/api';
+    private url: string = 'Usuario';
+    constructor(url: string) {
+        this.url = url;
+    }
+
+    public login = async (info: T): Promise<U> => {
+        const { data } = await axios({
+            method: 'post',
+            url: `${this.root}/${this.url}/token`,
+            data: info,
+        });
+        return data;
+    };
+
+    public register = async (info: T): Promise<U> => {
+        const { data } = await axios({
+            method: 'post',
+            url: `${this.root}/${this.url}/register`,
+            data: info,
+        });
+        return data;
+    };
+}
+
 
 export const ListGet = {
     menuDinamic: new Menu<IEcommerse['imenuDinamic']>('Menu'),
     usuario: new Menu<ISesionAuth['registerResponse']>('Usuario'),
     home: new Menu<IEcommerse['home']>('Home/GetHome'),
-    login: new Sesion<ISesionAuth['loginRequest'],
-        ISesionAuth['loginResponse']>('Usuario'),
+
+    login: new Sesion<ISesionAuth['loginRequest'], ISesionAuth['loginResponse']>
+        ('Usuario'),
     register: new Sesion<ISesionAuth['registerRequest'],
         ISesionAuth['registerResponse']>('Usuario'),
+
     homeDelete: new Home('DeleteProducts'),
     postHome: new Home('InsertProducts'),
 };
