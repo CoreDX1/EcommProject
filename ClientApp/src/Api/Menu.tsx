@@ -15,17 +15,8 @@ class Menu<T> implements CategoryApi<T> {
         this.url = url;
     }
 
-    public getAll = async () => {
-        const { data } = await axios.get<T[]>(`${this.root}/${this.url}`);
-        return data;
-    };
-
-    public post = async (info: ISesionAuth['loginResponse']): Promise<T> => {
-        const { data } = await axios({
-            method: 'post',
-            url: `${this.root}/${this.url}/token`,
-            data: info,
-        });
+    public getAll = async () : Promise<T[]> => {
+        const { data } = await axios.get(`${this.root}/${this.url}`);
         return data;
     };
 }
@@ -40,7 +31,7 @@ class Home {
     public post = async (info: IEcommerse['postHome']) => {
         const { data } = await axios({
             method: 'post',
-            url: `${this.root}/${this.url}/InsertProducts`,
+            url: `${this.root}/${this.url}`,
             data: info,
         });
         return data;

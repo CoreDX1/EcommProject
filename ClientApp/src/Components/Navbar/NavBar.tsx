@@ -1,45 +1,55 @@
-import { useEffect, useState } from 'react'
-import { IEcommerse } from '../../Interface/Ecommerce'
-import { ListGet } from '../../Api/Menu'
+import { useEffect, useState } from 'react';
+import { IEcommerse} from '../../Interface/Ecommerce';
+import { ListGet } from '../../Api/Menu';
 
-import './Navbar.scss'
-import { Link } from 'react-router-dom'
-import { useAuth } from '../../Context/AuthContext'
+import './Navbar.scss';
+import { Link } from 'react-router-dom';
+import { useAuth } from '../../Context/AuthContext';
 
-interface IProps {
-    sesion: IEcommerse['loginResponse'] | null
-}
+// interface IProps {
+//     sesion: ISesion | null;
+// }
 
-export const Navbar = ({ sesion }: IProps): JSX.Element => {
-    const [get, setGet] = useState<IEcommerse['imenuDinamic'][]>([])
-    const { signOut } = useAuth()
+export const Navbar = (): JSX.Element => {
+    const [get, setGet] = useState<IEcommerse['imenuDinamic'][]>([]);
+    const { signOut, login } = useAuth();
 
     const GetSubCategory = async (): Promise<void> => {
-        const get = await ListGet.menuDinamic.getAll()
-        setGet(get)
+        const get = await ListGet.menuDinamic.getAll();
+        setGet(get);
+    };
+
+    const test = () => {
+    const admin = login?.usuarioApi.rol.includes('admin') as boolean;
+    if (admin) {
+        return <Link to='/admin'>Admin</Link>;
+    }
+    if (login?.usuarioApi.rol.includes('empleado')) {
+        return <Link to={'/loginUsuario'}>Empleado</Link>;
+    }
+    return null
     }
 
     useEffect((): void => {
-        GetSubCategory()
-    }, [])
+        GetSubCategory();
+    }, []);
 
     return (
         <header>
-            <nav className="menu-bar">
-                <div className="menu-1">
-                    <Link className="menu__logo" to="/">
+            <nav className='menu-bar'>
+                <div className='menu-1'>
+                    <Link className='menu__logo' to='/'>
                         logo
                     </Link>
-                    <ul className="menu">
+                    <ul className='menu'>
                         {get.map(
                             (item: IEcommerse['imenuDinamic']): JSX.Element => {
                                 return (
                                     <li
-                                        className="dropdown"
-                                        key={item.id_category}
-                                    >
-                                        <a href="">{item.name}</a>
-                                        <ul className="dropdown-menu">
+                                        className='dropdown'
+                                        key={item.id_category}>
+                                        <a href=''>{item.name}</a>
+                                        <ul className='dropdown-menu'>
                                             {item.submenu.map(
                                                 (
                                                     x: string,
@@ -47,57 +57,59 @@ export const Navbar = ({ sesion }: IProps): JSX.Element => {
                                                 ): JSX.Element => {
                                                     return (
                                                         <li key={index}>
-                                                            <a href="">{x}</a>
+                                                            <a href=''>{x}</a>
                                                         </li>
-                                                    )
+                                                    );
                                                 }
                                             )}
                                         </ul>
                                     </li>
-                                )
+                                );
                             }
                         )}
                     </ul>
+                    {
+                        test()
+                    }
                 </div>
 
                 {/* Menu Right */}
                 <nav>
-                    <ul className="nav">
-                        <li className="nav__item">
+                    <ul className='nav'>
+                        <li className='nav__item'>
                             <img
-                                className="nav__logo"
-                                src="/magnifying-glass-solid.svg"
-                                alt=""
+                                className='nav__logo'
+                                src='/magnifying-glass-solid.svg'
+                                alt=''
                             />
-                            <a className="nav__link" href="">
+                            <a className='nav__link' href=''>
                                 Buscar
                             </a>
                         </li>
-                        <li className="nav__item">
+                        <li className='nav__item'>
                             <img
-                                className="nav__logo"
-                                src="/cart-shopping-solid.svg"
-                                alt=""
+                                className='nav__logo'
+                                src='/cart-shopping-solid.svg'
+                                alt=''
                             />
-                            <a className="nav__link" href="">
+                            <a className='nav__link' href=''>
                                 Items
                             </a>
                         </li>
-                        {sesion ? (
+                        {login ? (
                             <button
-                                className="nav__signout"
-                                onClick={() => signOut()}
-                            >
+                                className='nav__signout'
+                                onClick={() => signOut()}>
                                 Cerrar Sesion
                             </button>
                         ) : (
-                            <li className="nav__item nav__item--active">
+                            <li className='nav__item nav__item--active'>
                                 <img
-                                    className="nav__logo"
-                                    src="/user-solid.svg"
-                                    alt=""
+                                    className='nav__logo'
+                                    src='/user-solid.svg'
+                                    alt=''
                                 />
-                                <Link className="nav__link" to="/login">
+                                <Link className='nav__link' to='/login'>
                                     Inciar Sesion
                                 </Link>
                             </li>
@@ -106,5 +118,5 @@ export const Navbar = ({ sesion }: IProps): JSX.Element => {
                 </nav>
             </nav>
         </header>
-    )
-}
+    );
+};

@@ -1,87 +1,111 @@
-import { Form, Formik } from 'formik'
-import { useEffect, useState } from 'react'
-import { Navigate } from 'react-router-dom'
-import { ListGet } from '../Api/Menu'
-import { useAuth } from '../Context/AuthContext'
-import { IEcommerse } from '../Interface/Ecommerce'
+import { Form, Formik } from 'formik';
+import { useEffect, useState } from 'react';
+import { Navigate } from 'react-router-dom';
+import { ListGet } from '../Api/Menu';
+import { useAuth } from '../Context/AuthContext';
+import { IEcommerse } from '../Interface/Ecommerce';
 
 export const Admin = (): JSX.Element => {
-    const { login } = useAuth()
-    const rol = !!login?.usuarioApi.rol.includes('admin')
+    const { login } = useAuth();
+    const rol = !!login?.usuarioApi.rol.includes('admin');
 
     if (!rol) {
-        return <Navigate to="/" />
+        return <Navigate to='/' />;
     }
 
-    const [products, setProducts] = useState<IEcommerse['home'][]>([])
+    const [products, setProducts] = useState<IEcommerse['home'][]>([]);
 
     const GetHome = async () => {
-        const data = await ListGet.home.getAll()
-        setProducts(data)
-    }
+        const data = await ListGet.home.getAll();
+        setProducts(data);
+    };
 
     const handDelete = async (button: number) => {
         try {
             const axiosDelete = await ListGet.homeDelete.deleteToke({
                 id_home: button,
-            })
+            });
             if (axiosDelete.success) {
-                GetHome()
+                GetHome();
             }
         } catch (ex) {
-            console.log(ex)
+            console.log(ex);
         }
+    };
+
+    interface Ivalue {
+        title: string;
+        price: number;
+        image: string;
     }
 
-    useEffect(() => {
-        GetHome()
-    }, [])
+    const ValidateValue = ({ image, price, title }: Ivalue) => {
+        if (image.length == 0) {
+            throw new Error('La imagen no puede estar vacia');
+        }
+        if (price === 0 || typeof price === 'string') {
+            throw new Error('El precio no puede estar vacio');
+        }
+        if (!title.length) {
+            throw new Error('El titulo no puede estar vacio');
+        }
+        return true;
+    };
 
+    useEffect(() => {
+        GetHome();
+    }, []);
     return (
         <div>
             <div>
-            <Formik
-                initialValues={{ title: '', price: 0, image: '' }}
-                onSubmit={ async (values) => {
-                    try {
-                        const data = await ListGet.postHome.post(values)
-                        if (data.success) {
-                            GetHome()
+                <Formik
+                    initialValues={{
+                        title: '',
+                        price: 0,
+                        image: '',
+                    }}
+                    onSubmit={async values => {
+                        try {
+                            ValidateValue(values) ? alert('Todo bien') : null;
+                            const response = await ListGet.postHome.post(values)
+                            if (response.success) {
+                                alert('Todo bien');
+                            }
+                        } catch (ex) {
+                            alert(ex);
                         }
-                    }catch(ex){
-                        console.log(ex)
-                    }
-                }}
-            >
-                {({ handleChange, handleSubmit}) => (
-                    <Form className="form__form" onSubmit={handleSubmit}>
-                        <label>Title</label>
-                        <input
-                            type="text"
-                            name="title"
-                            onChange={handleChange}
-                        />
-                        <label>Price</label>
-                        <input
-                            type="text"
-                            name="price"
-                            onChange={handleChange}
-                        />
+                    }}>
+                    {({ handleChange, handleSubmit, setFieldValue }) => (
+                        <Form className='form__form' onSubmit={handleSubmit}>
+                            <label>Title</label>
+                            <input
+                                type='text'
+                                name='title'
+                                onChange={handleChange}
+                            />
+                            <label>Price</label>
+                            <input
+                                type='number'
+                                name='price'
+                                onChange={handleChange}
+                            />
 
-                        <label>Image</label>
-                        <input
-                            type="file"
-                            name="Image"
-                            onChange={handleChange}
-                        />
-                        <button
-                    type="submit"
-                        >
-                            Guardar
-                        </button>
-                    </Form>
-                )}
-            </Formik>
+                            <label>Image</label>
+                            <input
+                                type='file'
+                                name='Image'
+                                onChange={event => {
+                                    setFieldValue(
+                                        'image',
+                                        event.currentTarget.files &&
+                                            event.currentTarget.files[0].name
+                                    );
+                                }}
+                            />
+                            <button type='submit'>Guardar</button>
+                        </Form>
+                    )}
+                </Formik>
             </div>
             <table>
                 <thead>
@@ -92,15 +116,14 @@ export const Admin = (): JSX.Element => {
                     </tr>
                 </thead>
                 <tbody>
-                    {products.map((item) => (
+                    {products.map(item => (
                         <tr key={item.id_home}>
                             <td>{item.title}</td>
                             <td>{item.price}</td>
                             <td>
                                 <button>Editar</button>
                                 <button
-                                    onClick={() => handDelete(item.id_home)}
-                                >
+                                    onClick={() => handDelete(item.id_home)}>
                                     Eliminar
                                 </button>
                             </td>
@@ -109,5 +132,5 @@ export const Admin = (): JSX.Element => {
                 </tbody>
             </table>
         </div>
-    )
-}
+    );
+};

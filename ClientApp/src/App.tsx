@@ -13,12 +13,11 @@ import { LoginUsuario } from './Components/Navigate/LoginUsuario'
 import { SoloProduts } from './Components/SoloProduts/SoloProduts'
 
 function App(): JSX.Element {
-    const { login } = useAuth()
+    // const { login } = useAuth()
     return (
         <>
             <Quote />
-            <Navbar sesion={login} />
-            {login?.result ? <Navibar /> : null}
+            <Navbar/>
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/:id" element={<SoloProduts />} />

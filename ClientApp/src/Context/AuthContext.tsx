@@ -6,6 +6,8 @@ interface Prop {
     children: JSX.Element | JSX.Element[];
 }
 
+// Este Type es para el contexto
+
 type AuthContextType = {
     login: ISesionAuth['loginResponse'] | null;
     home: IEcommerse['home'][];
@@ -15,6 +17,8 @@ type AuthContextType = {
 
 const AuthContext = createContext({} as AuthContextType);
 
+// Este es el Hook para usar el contexto
+
 export const useAuth = () => {
     const context = useContext(AuthContext);
     if (!context)
@@ -22,6 +26,7 @@ export const useAuth = () => {
     return context;
 };
 
+// Este es el Provider
 export const AuthProvider = ({ children }: Prop) => {
     const [login, setLogin] = useState<ISesionAuth['loginResponse'] | null>(
         window.localStorage.getItem('login')
@@ -39,6 +44,9 @@ export const AuthProvider = ({ children }: Prop) => {
         };
         LocalStore();
     }, [login]);
+
+
+    // Sign In y Sign Out
 
     const signIn = async (formUser: ISesionAuth['loginResponse']) => {
         setLogin(formUser);
