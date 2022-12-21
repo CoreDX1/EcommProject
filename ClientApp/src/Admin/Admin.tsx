@@ -1,19 +1,12 @@
 import { Form, Formik } from 'formik';
 import { useEffect, useState } from 'react';
-import { Navigate } from 'react-router-dom';
+import {  useNavigate } from 'react-router-dom';
 import { ListGet } from '../Api/Menu';
-import { useAuth } from '../Context/AuthContext';
 import { IEcommerse } from '../Interface/Ecommerce';
 
 export const Admin = (): JSX.Element => {
-    const { login } = useAuth();
-    const rol = !!login?.usuarioApi.rol.includes('admin');
-
-    if (!rol) {
-        return <Navigate to='/' />;
-    }
-
     const [products, setProducts] = useState<IEcommerse['home'][]>([]);
+    const navigate = useNavigate();
 
     const GetHome = async () => {
         const data = await ListGet.home.getAll();
@@ -59,11 +52,7 @@ export const Admin = (): JSX.Element => {
         <div>
             <div>
                 <Formik
-                    initialValues={{
-                        title: '',
-                        price: 0,
-                        image: '',
-                    }}
+                    initialValues={{ title: '', price: 0, image: '' }}
                     onSubmit={async values => {
                         try {
                             ValidateValue(values) ? alert('Todo bien') : null;
@@ -123,7 +112,16 @@ export const Admin = (): JSX.Element => {
                             <td>{item.title}</td>
                             <td>{item.price}</td>
                             <td>
-                                <button>Editar</button>
+                                <button
+                                    onClick={() =>
+                                        navigate(
+                                            `/admin/${
+                                                item.id_home
+                                            }-${item.title.replace(/\s/g, '-')}`
+                                        )
+                                    }>
+                                    Editar
+                                </button>
                                 <button
                                     onClick={() => handDelete(item.id_home)}>
                                     Eliminar

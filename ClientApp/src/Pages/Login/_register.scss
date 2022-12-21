@@ -1,50 +1,50 @@
 @use '../../Components/Scss/sesion' as s;
-.register{
-   position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  width: 400px;
-  height: auto;
-  background-color: white;
-  border-radius: 10px;
-  padding: 3.8rem;
-  .register__title{
-    text-align: center;
-    padding: 0 0 40px;
-  }
-
-  .register__form{
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    label{
-      margin: 0 0 5px;
-      text-align: left;
-    }
-    input {
-      padding: 0.5rem;
-      border: 1px solid rgb(182, 179, 179);
-      border-radius: 5px;
-      background-color: rgb(255, 255, 255);
-      &:focus{
-        background-color: rgba(202, 202, 202, 0.212);
-      }
-    }
-     button{
-      padding: 0.5rem;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      background-color: s.$button-background-color;
-      cursor: pointer;
-      &:hover{
-        background-color: s.$button-hover-background-color ;
-      }
+.register {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    height: auto;
+    background-color: white;
+    border-radius: 10px;
+    padding: 3.8rem;
+    .register__title {
+        text-align: center;
+        padding: 0 0 40px;
     }
 
-    .register__error{
-      color: red;
-      font-weight: 600;
+    .register__form {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        label {
+            margin: 0 0 5px;
+            text-align: left;
+        }
+        input {
+            padding: 0.5rem;
+            border: 1px solid rgb(182, 179, 179);
+            border-radius: 5px;
+            background-color: rgb(255, 255, 255);
+            &:focus {
+                background-color: rgba(202, 202, 202, 0.212);
+            }
+        }
+        button {
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: s.$button-background-color;
+            cursor: pointer;
+            &:hover {
+                background-color: s.$button-hover-background-color;
+            }
+        }
+
+        .register__error {
+            color: red;
+            font-weight: 600;
+        }
     }
-  }
 }

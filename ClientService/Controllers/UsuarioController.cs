@@ -35,8 +35,8 @@ public class UsuarioController : Controller
     public async Task<dynamic> GetRegister([FromBody] Register user)
     {
         Usuario data = await usuario.CreateUser(user);
-        if(data != null) return Ok(new { success = true, message = "Usuario creado"});
-        return new { success = false, message = "El Email ingresado existe"};
+        if (data != null) return Ok(new { success = true, message = "Usuario creado" });
+        return new { success = false, message = "El Email ingresado existe" };
     }
 
     [HttpPost]
@@ -44,16 +44,16 @@ public class UsuarioController : Controller
     public async Task<dynamic> login([FromBody] LoginUser user)
     {
         Usuario data = await usuario.GetByUser(user.email, user.password);
-        if (data != null) return new { success = true, message = "Usuario encontrado" , data};
+        if (data != null) return new { success = true, message = "Usuario encontrado", data };
         return new { success = false, message = "El email ingresado existe" };
-        
+
     }
 
     [HttpPost]
     [Route("token")]
     public async Task<dynamic> IniciarSesion([FromBody] Object optdata)
     {
-        var data = JsonConvert.DeserializeObject<dynamic>(optdata.ToString());
+        dynamic data = JsonConvert.DeserializeObject<dynamic>(optdata.ToString());
         string email = data.email.ToString();
         string password = data.password.ToString();
         Usuario usuarioApi = await usuario.GetByUser(email, password);
