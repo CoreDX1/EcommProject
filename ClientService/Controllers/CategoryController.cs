@@ -22,7 +22,7 @@ public class CategoryController : Controller
     public async Task<ActionResult<Category>> Get()
     {
         List<Category> data = await category.Get();
-        if(data != null) return StatusCode(200, data);
+        if (data != null) return StatusCode(200, data);
         return StatusCode(404, "No hay datos");
     }
 
@@ -33,7 +33,7 @@ public class CategoryController : Controller
     public async Task<ActionResult<Category>> Insert([FromBody] Category form)
     {
         Category data = await category.Insert(form);
-        if(data != null) StatusCode(200, data);
+        if (data != null) StatusCode(200, data);
         return StatusCode(404, "No se pudo insertar");
     }
 }
