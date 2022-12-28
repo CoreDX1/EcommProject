@@ -73,7 +73,7 @@ export const Admin = (): JSX.Element => {
                                 'http://localhost:5020/api/UploadImagen',
                                 formData
                             );
-                            console.log(resImagne.status);
+                            console.log(resImagne);
                             if (response.success) {
                                 alert('Todo bien');
                             }
