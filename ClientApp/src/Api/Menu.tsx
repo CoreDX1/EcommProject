@@ -15,7 +15,7 @@ class Menu<T> implements CategoryApi<T> {
         this.url = url;
     }
 
-    public getAll = async () : Promise<T[]> => {
+    public getAll = async (): Promise<T[]> => {
         const { data } = await axios.get(`${this.root}/${this.url}`);
         return data;
     };
@@ -49,6 +49,15 @@ class Home {
         });
         return data;
     };
+
+    public postImagen = async (Imagen : File ) => {
+        const { data } = await axios({
+            method: 'post',
+            url: 'http://localhost:5020/api/' + this.url,
+            data: Imagen,
+        });
+        return data;
+    };
 }
 class Sesion<T, U> implements ISesion<T, U> {
     private root: string = 'http://localhost:5020/api';
@@ -76,17 +85,21 @@ class Sesion<T, U> implements ISesion<T, U> {
     };
 }
 
-
 export const ListGet = {
     menuDinamic: new Menu<IEcommerse['imenuDinamic']>('Menu'),
     usuario: new Menu<ISesionAuth['registerResponse']>('Usuario'),
     home: new Menu<IEcommerse['home']>('Home/GetHome'),
 
-    login: new Sesion<ISesionAuth['loginRequest'], ISesionAuth['loginResponse']>
-        ('Usuario'),
-    register: new Sesion<ISesionAuth['registerRequest'],
-        ISesionAuth['registerResponse']>('Usuario'),
+    login: new Sesion<
+        ISesionAuth['loginRequest'],
+        ISesionAuth['loginResponse']
+    >('Usuario'),
+    register: new Sesion<
+        ISesionAuth['registerRequest'],
+        ISesionAuth['registerResponse']
+    >('Usuario'),
 
     homeDelete: new Home('DeleteProducts'),
     postHome: new Home('InsertProducts'),
+    postImagen: new Home('UploadImagen'),
 };

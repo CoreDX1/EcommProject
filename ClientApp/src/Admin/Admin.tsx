@@ -1,11 +1,15 @@
+import axios from 'axios';
 import { Form, Formik } from 'formik';
 import { useEffect, useState } from 'react';
-import {  useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { ListGet } from '../Api/Menu';
 import { IEcommerse } from '../Interface/Ecommerce';
 
 export const Admin = (): JSX.Element => {
     const [products, setProducts] = useState<IEcommerse['home'][]>([]);
+    const [file, setFile] = useState<File | undefined>();
+    const [filename , setFilename] = useState<string>();
+
     const navigate = useNavigate();
 
     const GetHome = async () => {
@@ -26,39 +30,50 @@ export const Admin = (): JSX.Element => {
         }
     };
 
-    interface Ivalue {
-        title: string;
-        price: number;
-        image: string;
-    }
-
-    const ValidateValue = ({ image, price, title }: Ivalue): boolean => {
-        if (image.length == 0) {
-            throw new Error('La imagen no puede estar vacia');
-        }
-        if (price === 0 || typeof price === 'string') {
-            throw new Error('El precio no puede estar vacio');
-        }
-        if (!title.length) {
-            throw new Error('El titulo no puede estar vacio');
-        }
-        return true;
-    };
+    // interface Ivalue {
+    // title: string;
+    // price: number;
+    // image: File;
+    // }
+    //
+    // const ValidateValue = ({ image, price, title }: Ivalue): boolean => {
+    // if (image.name.length > 0) {
+    // throw new Error('La imagen no puede estar vacia');
+    // }
+    // if (price === 0 || typeof price === 'string') {
+    // throw new Error('El precio no puede estar vacio');
+    // }
+    // if (!title.length) {
+    // throw new Error('El titulo no puede estar vacio');
+    // }
+    // return true;
+    // };
 
     useEffect(() => {
         GetHome();
     }, []);
+
     return (
         <div>
             <div>
                 <Formik
-                    initialValues={{ title: '', price: 0, image: '' }}
+                    initialValues={{ title: '', price: 0, image: File }}
                     onSubmit={async values => {
+                        // ValidateValue(values);
                         try {
-                            ValidateValue(values) ? alert('Todo bien') : null;
-                            const response = await ListGet.postHome.post(
-                                values
+                            const response = await ListGet.postHome.post({
+                                title: values.title,
+                                price: values.price,
+                                image: filename as string,
+                            });
+                            const formData = new FormData();
+                            formData.append('formFile', file as File);
+                            formData.append('filename', filename as string);
+                            const resImagne = await axios.post(
+                                'http://localhost:5020/api/UploadImagen',
+                                formData
                             );
+                            console.log(resImagne.status);
                             if (response.success) {
                                 alert('Todo bien');
                             }
@@ -66,7 +81,7 @@ export const Admin = (): JSX.Element => {
                             alert(ex);
                         }
                     }}>
-                    {({ handleChange, handleSubmit, setFieldValue }) => (
+                    {({ handleChange, handleSubmit }) => (
                         <Form className='form__form' onSubmit={handleSubmit}>
                             <label>Title</label>
                             <input
@@ -78,19 +93,23 @@ export const Admin = (): JSX.Element => {
                             <input
                                 type='number'
                                 name='price'
+                                accept='image/*'
                                 onChange={handleChange}
                             />
 
                             <label>Image</label>
                             <input
                                 type='file'
-                                name='Image'
+                                name='file'
                                 onChange={event => {
-                                    setFieldValue(
-                                        'image',
-                                        event.currentTarget.files &&
-                                            event.currentTarget.files[0].name
-                                    );
+                                    if (
+                                        event.target.files &&
+                                        event.target.files[0]
+                                    ) {
+                                        console.log(event.target.files[0]);
+                                        setFile(event.target.files[0]);
+                                        setFilename(event.target.files[0].name);
+                                    }
                                 }}
                             />
                             <button type='submit'>Guardar</button>
