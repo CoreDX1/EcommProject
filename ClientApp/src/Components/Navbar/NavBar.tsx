@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { IEcommerse} from '../../Interface/Ecommerce';
+import { IEcommerse } from '../../Interface/Ecommerce';
 import { ListGet } from '../../Api/Menu';
 
 import './Navbar.scss';
@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../../Context/AuthContext';
 
 // interface IProps {
-//     sesion: ISesion | null;
+// sesion: ISesion | null;
 // }
 
 export const Navbar = (): JSX.Element => {
@@ -19,16 +19,16 @@ export const Navbar = (): JSX.Element => {
         setGet(get);
     };
 
-    const test = ()  : JSX.Element | null  => {
-    const admin = login?.usuarioApi.rol.includes('admin') as boolean;
-    if (admin) {
-        return <Link to='/admin'>Admin</Link>;
-    }
-    if (login?.usuarioApi.rol.includes('empleado')) {
-        return <Link to={'/loginUsuario'}>Empleado</Link>;
-    }
-    return null
-    }
+    const test = (): JSX.Element | null => {
+        const admin = login?.usuarioApi.rol.includes('admin') as boolean;
+        if (admin) {
+            return <Link to='/admin'>Admin</Link>;
+        }
+        if (login?.usuarioApi.rol.includes('empleado')) {
+            return <Link to={'/loginUsuario'}>Empleado</Link>;
+        }
+        return null;
+    };
 
     useEffect((): void => {
         GetSubCategory();
@@ -48,16 +48,14 @@ export const Navbar = (): JSX.Element => {
                                     <li
                                         className='dropdown'
                                         key={item.id_category}>
-                                        <a href=''>{item.name}</a>
+                                        <a>{item.name}</a>
                                         <ul className='dropdown-menu'>
                                             {item.submenu.map(
-                                                (
-                                                    x: string,
-                                                    index: number
-                                                ): JSX.Element => {
+                                                (x, index): JSX.Element => {
                                                     return (
                                                         <li key={index}>
-                                                            <a href=''>{x}</a>
+                                                            <Link to={item.name + '/' + x} 
+                                                            >{x}</Link>
                                                         </li>
                                                     );
                                                 }
@@ -68,9 +66,7 @@ export const Navbar = (): JSX.Element => {
                             }
                         )}
                     </ul>
-                    {
-                        test()
-                    }
+                    {test()}
                 </div>
 
                 {/* Menu Right */}

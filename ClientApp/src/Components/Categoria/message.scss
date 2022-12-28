@@ -1,0 +1,19 @@
+.message{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 200px;
+    .texto{
+        background-color: white;
+        padding: 10px;
+        border-radius: 10px;
+        // Shadow effect
+        box-shadow: 0 0 10px rgba(0,0,0,0.5);
+        font-size: 30px;
+        font-weight: bold;
+        &:hover{
+            // Shadow effect
+            box-shadow: 0 0 10px rgba(0,0,0,0.8);
+        }
+    }
+}

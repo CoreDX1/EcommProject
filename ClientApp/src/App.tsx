@@ -11,6 +11,7 @@ import { SoloProduts } from './Components/SoloProduts/SoloProduts';
 import { LoginUsuario } from './Components/Navigate/LoginUsuario';
 import { ProtectedRoute } from './Components/ProtectedRoute';
 import { Edit } from './Admin/Edit';
+import { Categoria } from './Components/Categoria/Categoria';
 
 function App(): JSX.Element {
     return (
@@ -23,6 +24,7 @@ function App(): JSX.Element {
                 <Route path='/login' element={<Login />} />
                 <Route path='/loginUsuario' element={<LoginUsuario />} />
                 <Route path='/register' element={<Register />} />
+                <Route path='/:categoria/:subcategoria' element={<Categoria />} />
                 <Route element={<ProtectedRoute redirectTo='/'/>}>
                     <Route path='/admin' element={<Admin />} />
                     <Route path='/admin/:id' element={<Edit />} />
