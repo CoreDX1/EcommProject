@@ -7,70 +7,82 @@ using Microsoft.EntityFrameworkCore;
 namespace ClientService.Services;
 public class HomeSer : IHome<Home>
 {
-    private DataContext dbpost;
+  private DataContext dbpost;
 
-    public HomeSer(DataContext _dbpost)
+  public HomeSer(DataContext _dbpost)
+  {
+    this.dbpost = _dbpost;
+  }
+
+  public async Task<List<Home>> GetHome()
+  {
+    var data = await dbpost.Homes.ToListAsync();
+    return data;
+  }
+
+  public async Task<Home> InsertProducts(CreateProduct add)
+  {
+    Home data = new Home()
     {
-        this.dbpost = _dbpost;
+      title = add.title,
+      image = add.image,
+      price = add.price
+    };
+    await dbpost.Homes.AddAsync(data);
+    await dbpost.SaveChangesAsync();
+    return data;
+  }
+
+  public async Task<Home> DeleteProducts(int id)
+  {
+    string path = @"/home/core/Desktop/BackEnd/EcommProject/ClientApp/public/Products";
+    var data = await dbpost.Homes.FindAsync(id);
+    dbpost.Homes.Remove(data);
+    // Delete image
+    var fullPath = Path.Combine(path, data.image);
+    try
+    {
+      if (File.Exists(fullPath))
+        File.Delete(fullPath);
     }
-
-    public async Task<List<Home>> GetHome()
+    catch (Exception e)
     {
-        var data = await dbpost.Homes.ToListAsync();
-        return data;
+      Console.WriteLine(e.Message);
     }
+    await dbpost.SaveChangesAsync();
+    return data;
+  }
 
-    public async Task<Home> InsertProducts(CreateProduct add)
+  public async Task<dynamic> ValidarToken(ClaimsIdentity identity)
+  {
+    try
     {
-        Home data = new Home()
+      if (identity.Claims.Count() == 0)
+      {
+        return new
         {
-            title = add.title,
-            image = add.image,
-            price = add.price
+          success = false,
+          message = "Verificar si esta enviando un toke valido",
+          result = ""
         };
-        await dbpost.Homes.AddAsync(data);
-        await dbpost.SaveChangesAsync();
-        return data;
+      }
+      var id = identity.Claims.FirstOrDefault(x => x.Type == "id").Value;
+      Usuario usuario = await dbpost.Usuarios.FirstOrDefaultAsync(x => x.id_user.ToString() == id);
+      return new
+      {
+        success = true,
+        message = "Token valido",
+        result = usuario
+      };
     }
-
-    public async Task<Home> DeleteProducts(int id)
+    catch (Exception e)
     {
-        var data = await dbpost.Homes.FindAsync(id);
-        dbpost.Homes.Remove(data);
-        await dbpost.SaveChangesAsync();
-        return data;
+      return new
+      {
+        success = false,
+        message = "Chat: " + e.Message,
+        result = ""
+      };
     }
-
-    public async Task<dynamic> ValidarToken(ClaimsIdentity identity)
-    {
-        try
-        {
-            if (identity.Claims.Count() == 0)
-            {
-                return new
-                {
-                    success = false,
-                    message = "Verificar si esta enviando un toke valido",
-                    result = ""
-                };
-            }
-            var id = identity.Claims.FirstOrDefault(x => x.Type == "id").Value;
-            Usuario usuario = await dbpost.Usuarios.FirstOrDefaultAsync(x => x.id_user.ToString() == id);
-            return new
-            {
-                success = true,
-                message = "Token valido",
-                result = usuario
-            };
-        }
-        catch (Exception e)
-        {
-            return new
-            {
-                success = false,
-                message = "Chat: " + e.Message,
-                result = ""
-            };
-        }
-    }
+  }
 }
