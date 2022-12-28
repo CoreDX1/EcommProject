@@ -69,11 +69,11 @@ export const Admin = (): JSX.Element => {
                             const formData = new FormData();
                             formData.append('formFile', file as File);
                             formData.append('filename', filename as string);
-                            const resImagne = await axios.post(
+                             await axios.post(
                                 'http://localhost:5020/api/UploadImagen',
                                 formData
                             );
-                            console.log(resImagne);
+                            // console.log(resImagne);
                             if (response.success) {
                                 alert('Todo bien');
                             }
@@ -106,7 +106,7 @@ export const Admin = (): JSX.Element => {
                                         event.target.files &&
                                         event.target.files[0]
                                     ) {
-                                        console.log(event.target.files[0]);
+                                        // console.log(event.target.files[0]);
                                         setFile(event.target.files[0]);
                                         setFilename(event.target.files[0].name);
                                     }
