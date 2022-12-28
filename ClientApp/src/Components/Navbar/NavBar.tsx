@@ -6,10 +6,6 @@ import './Navbar.scss';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../Context/AuthContext';
 
-// interface IProps {
-// sesion: ISesion | null;
-// }
-
 export const Navbar = (): JSX.Element => {
     const [get, setGet] = useState<IEcommerse['imenuDinamic'][]>([]);
     const { signOut, login } = useAuth();
@@ -20,12 +16,11 @@ export const Navbar = (): JSX.Element => {
     };
 
     const test = (): JSX.Element | null => {
-        const admin = login?.usuarioApi.rol.includes('admin') as boolean;
-        if (admin) {
-            return <Link to='/admin'>Admin</Link>;
+        if (login?.usuarioApi.rol.includes('admin')) {
+            return <Link className='rol admin' to='/admin'>Admin</Link>;
         }
         if (login?.usuarioApi.rol.includes('empleado')) {
-            return <Link to={'/loginUsuario'}>Empleado</Link>;
+            return <Link className='rol empleado' to={'/loginUsuario'}>Empleado</Link>;
         }
         return null;
     };
@@ -43,7 +38,7 @@ export const Navbar = (): JSX.Element => {
                     </Link>
                     <ul className='menu'>
                         {get.map(
-                            (item: IEcommerse['imenuDinamic']): JSX.Element => {
+                            (item) => {
                                 return (
                                     <li
                                         className='dropdown'
@@ -51,7 +46,7 @@ export const Navbar = (): JSX.Element => {
                                         <a>{item.name}</a>
                                         <ul className='dropdown-menu'>
                                             {item.submenu.map(
-                                                (x, index): JSX.Element => {
+                                                (x, index) => {
                                                     return (
                                                         <li key={index}>
                                                             <Link to={item.name + '/' + x} 

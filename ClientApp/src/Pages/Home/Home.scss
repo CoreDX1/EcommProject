@@ -1,17 +1,36 @@
 .centro {
-  height: 230px;
-  background: rgb(19, 98, 99);
-  background: linear-gradient(
-    0deg,
-    rgba(19, 98, 99, 1) 0%,
-    rgba(45, 53, 253, 1) 100%
-  );
-  background-attachment: fixed;
-  background-size: cover;
+  margin: 0 50px;
+  height: 300px;
 
+  background: {
+    image : url("backgroundImagen.png");
+    size : cover;
+    position: center;
+    color: rgba(0, 0, 0, 0.459);
+    blend-mode:  soft-light;
+  };
+  border-radius: 10px;
+  // Message Center
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+
+  .title{
+    color: white;
+    font-size: 50px;
+    font-weight: 900;
+    text-align: center;
+  }
+  .description{
+    color: white;
+    font-size: 20px;
+    font-weight: 400;
+    text-align: center;
+  }
+  
+
+
 
   p {
     color: white;

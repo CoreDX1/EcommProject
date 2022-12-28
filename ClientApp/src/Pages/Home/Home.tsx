@@ -3,11 +3,11 @@ import './_cards.scss';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../Context/AuthContext';
 
-export const Home = (): JSX.Element => {
+export const Home = () => {
     const { home } = useAuth();
 
-    const renderProduct = (): JSX.Element[] => {
-        return home.map((item): JSX.Element => {
+    const renderProduct = () => {
+        return home.map((item) => {
             const urldynamic = item.title.replace(/\s/g, '-');
             return (
                 <ul className='cards' key={item.id_home}>
@@ -36,7 +36,8 @@ export const Home = (): JSX.Element => {
     return (
         <>
             <div className='centro'>
-                <p>Imagen</p>
+                <h1 className='title'>Bienvenido a mi tienda</h1>
+                <p className='description'> Aqui encontraras los mejores productos</p>
             </div>
             <main>
                 <h3 className='title'>Titulo</h3>

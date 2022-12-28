@@ -2,16 +2,18 @@
 @use 'NavbarRules' as r;
 
 header {
+
     .menu__logo {
         padding: 15px 0;
         font-size: 3rem;
         font-weight: bold;
-        padding-left: 10px;
+        // padding-left: 10px;
         text-decoration: none;
     }
 }
 
 .menu-bar {
+    padding: 0 50px;
     background-color: r.$color-background;
     display: flex;
     justify-content: space-between;
@@ -36,12 +38,12 @@ header {
                 }
 
                 &:hover {
-                    & > a {
+                    &>a {
                         background-color: r.$color-background;
                     }
 
                     &.dropdown {
-                        & > ul {
+                        &>ul {
                             visibility: visible;
                             transform: rotateX(0);
                             top: calc(100% + 15px);
@@ -94,6 +96,7 @@ header {
                                     background-color: red;
                                     transition: width 0.3s;
                                 }
+
                                 &:hover::after {
                                     width: 100%;
                                 }
@@ -108,7 +111,7 @@ header {
                         }
 
                         &:hover {
-                            & > a {
+                            &>a {
                                 // background-color: yellow;
 
                                 &.dropdown {
@@ -146,16 +149,38 @@ header {
                 }
             }
         }
+
+        .rol {
+            text-decoration: none;
+            font-size: 18px;
+            padding: 5px;
+            border: 1px solid black;
+            border-radius: 2px;
+            &{
+                padding: 2px 20px;
+            }
+            &.admin {
+                color : rgb(46, 88, 224);
+            }
+            &.empleado {
+                color : blue;
+            }
+        }
     }
 
     nav {
         .nav {
             display: flex;
+
             flex : {
                 direction: row;
             }
+
             .nav__signout {
+                margin-top: 10px;
+                padding: 5px;
                 height: 1.8rem;
+                cursor: pointer;
             }
 
             &__item {
@@ -170,10 +195,10 @@ header {
 
                 .nav__link {
                     text-decoration: none;
-                    padding: 5px;
                     color: r.$color-font;
                     font-weight: f.$font-weight;
                     display: inline-block;
+
                     &::after {
                         display: block;
                         content: '';
@@ -183,6 +208,7 @@ header {
                         background-color: red;
                         transition: width 0.3s;
                     }
+
                     &:hover::after {
                         width: 100%;
                     }
