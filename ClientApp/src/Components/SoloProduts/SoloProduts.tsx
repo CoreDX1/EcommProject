@@ -13,7 +13,7 @@ export const SoloProduts = () => {
           <h1>
             {product?.title}
           </h1>
-          <img src={product?.image} alt="" />
+          <img src={"Products/" + product?.image} alt="" />
           <h2>
             {product?.price}
           </h2>

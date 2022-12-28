@@ -30,24 +30,24 @@ export const Admin = (): JSX.Element => {
         }
     };
 
-    // interface Ivalue {
-    // title: string;
-    // price: number;
-    // image: File;
-    // }
-    //
-    // const ValidateValue = ({ image, price, title }: Ivalue): boolean => {
-    // if (image.name.length > 0) {
-    // throw new Error('La imagen no puede estar vacia');
-    // }
-    // if (price === 0 || typeof price === 'string') {
-    // throw new Error('El precio no puede estar vacio');
-    // }
-    // if (!title.length) {
-    // throw new Error('El titulo no puede estar vacio');
-    // }
-    // return true;
-    // };
+    interface Ivalue {
+    title: string;
+    price: number;
+    image: string;
+    }
+    
+    const ValidateValue = ({ image, price, title }: Ivalue): boolean => {
+    if (image.length > 0) {
+    throw new Error('La imagen no puede estar vacia');
+    }
+    if (price === 0 || typeof price === 'string') {
+    throw new Error('El precio no puede estar vacio');
+    }
+    if (!title.length) {
+    throw new Error('El titulo no puede estar vacio');
+    }
+    return true;
+    };
 
     useEffect(() => {
         GetHome();
@@ -57,9 +57,9 @@ export const Admin = (): JSX.Element => {
         <div>
             <div>
                 <Formik
-                    initialValues={{ title: '', price: 0, image: File }}
+                    initialValues={{ title: '', price: 0, image: "" }}
                     onSubmit={async values => {
-                        // ValidateValue(values);
+                        ValidateValue(values) ? alert('Todo bien') : alert('Error');
                         try {
                             const response = await ListGet.postHome.post({
                                 title: values.title,
