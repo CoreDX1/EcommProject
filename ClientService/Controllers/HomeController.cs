@@ -9,8 +9,8 @@ namespace ClientService.Controllers;
 [Route("api/[controller]")]
 public class HomeController : Controller
 {
-    private readonly IHome<Home> _homeSer;
-    public HomeController(IHome<Home> homeSer)
+    private readonly IHome _homeSer;
+    public HomeController(IHome homeSer)
     {
         _homeSer = homeSer;
     }

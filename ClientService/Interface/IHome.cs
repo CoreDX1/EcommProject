@@ -2,10 +2,10 @@ using System.Security.Claims;
 using EcommEntity.Models;
 
 namespace ClientService.Interface;
-public interface IHome<T>
+public interface IHome
 {
-    public Task<List<T>> GetHome();
-    public Task<T> InsertProducts(CreateProduct add);
-    public Task<T> DeleteProducts(int id);
+    public Task<List<Home>> GetHome();
+    public Task<Home> InsertProducts(CreateProduct add);
+    public Task<Home> DeleteProducts(int id);
     public Task<dynamic> ValidarToken(ClaimsIdentity identity);
 }

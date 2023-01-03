@@ -5,7 +5,7 @@ using EcommEntity.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace ClientService.Services;
-public class HomeSer : IHome<Home>
+public class HomeSer : IHome
 {
   private DataContext dbpost;
 
