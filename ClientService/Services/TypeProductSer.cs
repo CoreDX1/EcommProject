@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ClientService.Services;
 
-public class TypeProductSer : ITypeProduct<TypeProduct> {
+public class TypeProductSer : ITypeProduct {
 
     private DataContext dbpost;
 

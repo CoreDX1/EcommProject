@@ -4,7 +4,7 @@ using EcommEntity.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace ClientService.Services;
-public class ProductSer : IProduct<Product>
+public class ProductSer : IProduct
 {
     private DataContext dbpost;
     public ProductSer(DataContext context)

@@ -43,8 +43,8 @@ builder.Services.AddCors(options =>
     );
 });
 
-builder.Services.AddScoped<ITypeProduct<TypeProduct>, TypeProductSer>();
-builder.Services.AddScoped<IProduct<Product>, ProductSer>();
+builder.Services.AddScoped<ITypeProduct, TypeProductSer>();
+builder.Services.AddScoped<IProduct, ProductSer>();
 builder.Services.AddScoped<IMenuDinamic, MenuDinamic>();
 builder.Services.AddScoped<IUsuario, UsuarioSer>();
 builder.Services.AddScoped<IHome, HomeSer>();

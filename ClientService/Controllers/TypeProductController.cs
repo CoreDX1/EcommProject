@@ -8,9 +8,9 @@ namespace ClientService.Controllers;
 [Route("api/[controller]")]
 public class TypeProductController : Controller
 {
-    private ITypeProduct<TypeProduct> typeProduct;
+    private ITypeProduct typeProduct;
 
-    public TypeProductController(ITypeProduct<TypeProduct> entity)
+    public TypeProductController(ITypeProduct entity)
     {
         typeProduct = entity;
     }

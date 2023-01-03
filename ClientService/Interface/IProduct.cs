@@ -1,6 +1,7 @@
 namespace ClientService.Interface;
+using EcommEntity.Models;
 
-public interface IProduct<T>
+public interface IProduct
 {
-    public Task<List<T>> GetAll();
+    public Task<List<Product>> GetAll();
 }

@@ -8,8 +8,8 @@ namespace ClientService.Controllers;
 [Route("api/[controller]")]
 public class ProductController : Controller
 {
-    private IProduct<Product> product;
-    public ProductController(IProduct<Product> entity)
+    private IProduct product;
+    public ProductController(IProduct entity)
     {
         product = entity;
     }
