@@ -15,6 +15,11 @@ public class HomeController : Controller
         _homeSer = homeSer;
     }
 
+    /// <summary>
+    /// Get all products
+    /// </summary>
+    /// <returns>Json Products</returns>
+
     [HttpGet]
     [Route("GetHome")]
     public async Task<ActionResult<Home>> Get()
@@ -24,6 +29,11 @@ public class HomeController : Controller
         return StatusCode(404, "No hay datos");
     }
 
+    /// <summary>
+    /// Insert products
+    /// </summary>
+    /// <param name="add">Create Products</param>
+    /// <returns>Json Products</returns>
     [HttpPost]
     [Route("InsertProducts")]
     public async Task<ActionResult<Home>> Post(CreateProduct add)
@@ -32,6 +42,13 @@ public class HomeController : Controller
         if(data != null) return StatusCode(200, data);
         return StatusCode(404, "No se pudo insertar");
     }
+
+    /// <summary>
+    /// Method to delete product
+    /// </summary>
+    /// <param name="id">Id of product</param>
+    /// <returns>A success or failure message and the ID of the deleted product</returns>
+
     [HttpDelete]
     [Route("DeleteProducts")]
     public async Task<dynamic> Delete(DeleteID id)

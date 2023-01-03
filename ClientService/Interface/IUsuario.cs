@@ -1,8 +1,8 @@
 using EcommEntity.Models;
 
-public interface IUsuario<T>
+public interface IUsuario
 {
-    public Task<List<T>> GetUsuario();
-    public Task<T> GetByUser(string username , string password);
-    public Task<T> CreateUser(Register add);
+    public Task<List<Usuario>> GetUsuario();
+    public Task<Usuario> GetByUser(string username , string password);
+    public Task<Usuario> CreateUser(Register add);
 }

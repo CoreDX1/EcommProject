@@ -48,7 +48,7 @@ builder.Services.AddScoped<ISubCategory<SubCategory>, Subcategory>();
 builder.Services.AddScoped<ITypeProduct<TypeProduct>, TypeProductSer>();
 builder.Services.AddScoped<IProduct<Product>, ProductSer>();
 builder.Services.AddScoped<IMenuDinamic, MenuDinamic>();
-builder.Services.AddScoped<IUsuario<Usuario>, UsuarioSer>();
+builder.Services.AddScoped<IUsuario, UsuarioSer>();
 builder.Services.AddScoped<IHome<Home>, HomeSer>();
 builder.Services.AddScoped<IUploadImagen, UploadImagen>();
 

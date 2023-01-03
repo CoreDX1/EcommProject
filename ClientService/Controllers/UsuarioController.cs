@@ -12,15 +12,19 @@ namespace ClientService.Controllers;
 [Route("api/[Controller]")]
 public class UsuarioController : Controller
 {
-    private IUsuario<Usuario> usuario;
+    private IUsuario usuario;
     public IConfiguration _configuration;
 
-    public UsuarioController(IUsuario<Usuario> _usuario, IConfiguration configuration)
+    public UsuarioController(IUsuario _usuario, IConfiguration configuration)
     {
         this.usuario = _usuario;
         this._configuration = configuration;
     }
 
+    /// <summary>
+    /// Get all products
+    /// </summary>
+    /// <returns>Json Products</returns>
     [HttpGet]
     public async Task<IActionResult> Get()
     {
@@ -28,6 +32,13 @@ public class UsuarioController : Controller
         return Ok(data);
     }
 
+    /// <summary>
+    /// You create a new user
+    /// </summary>
+    /// <param name="user">Enter the data to register</param>
+    /// <returns> Data entered</returns>
+    /// <response code="200">Returns the data entered</response>
+    /// <response code="400">If the data is null</response>
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Usuario))]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -39,18 +50,19 @@ public class UsuarioController : Controller
         return new { success = false, message = "El Email ingresado existe" };
     }
 
-    [HttpPost]
-    [Route("login")]
-    public async Task<dynamic> login([FromBody] LoginUser user)
-    {
-        Usuario data = await usuario.GetByUser(user.email, user.password);
-        if (data != null) return new { success = true, message = "Usuario encontrado", data };
-        return new { success = false, message = "El email ingresado existe" };
-
-    }
-
+    /// <summary>
+    /// When the user logs in, a new token will be generated.
+    /// </summary>
+    /// <returns> Token and user data </returns>
+    /// <param name="optdata"> user email and password </param>
+    /// <response code="200"> Returns token and user data </response>
+    /// <response code="400"> Returns a message </response>
     [HttpPost]
     [Route("token")]
+    [Consumes("application/json")]
+    [ProducesDefaultResponseType, Produces("application/json")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<dynamic> IniciarSesion([FromBody] Object optdata)
     {
         dynamic data = JsonConvert.DeserializeObject<dynamic>(optdata.ToString());
