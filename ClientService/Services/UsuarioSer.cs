@@ -1,5 +1,4 @@
 using ClientService.Domain.Validators;
-using ClientService.Interface;
 using EcommData.Data;
 using EcommEntity.Models;
 using Microsoft.EntityFrameworkCore;
