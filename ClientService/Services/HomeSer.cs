@@ -14,12 +14,22 @@ public class HomeSer : IHome
     this.dbpost = _dbpost;
   }
 
+  /// <summary>
+  /// Get all products
+  /// </summary>
+  /// <returns>List Products</returns>
   public async Task<List<Home>> GetHome()
   {
     var data = await dbpost.Homes.ToListAsync();
     return data;
   }
 
+
+  /// <summary>
+  /// Create new product
+  /// </summary>
+  /// <param name="add">Date product</param>
+  /// <returns>Product</returns>
   public async Task<Home> InsertProducts(CreateProduct add)
   {
     Home data = new Home()
@@ -33,6 +43,11 @@ public class HomeSer : IHome
     return data;
   }
 
+  /// <summary>
+  /// Delete product and imagen
+	/// </summary>
+	/// <param name="id">Id product</param>
+	/// <returns>Delete product</returns>
   public async Task<Home> DeleteProducts(int id)
   {
     string path = @"/home/core/Desktop/BackEnd/EcommProject/ClientApp/public/Products";
@@ -53,6 +68,11 @@ public class HomeSer : IHome
     return data;
   }
 
+	/// <summary>
+	/// Validar token
+	/// </summary>
+	/// <param name="identity">ClaimsIdentity</param>
+	/// <returns>Usuario</returns>
   public async Task<dynamic> ValidarToken(ClaimsIdentity identity)
   {
     try

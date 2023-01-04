@@ -19,9 +19,13 @@ public class HomeController : Controller
     /// Get all products
     /// </summary>
     /// <returns>Json Products</returns>
+    /// <response code="200">Returns the data entered</response>
+    /// <response code="400">Return a message</response>
 
     [HttpGet]
     [Route("GetHome")]
+    [ProducesResponseType(200, Type = typeof(Home))]
+    [ProducesResponseType(404)]
     public async Task<ActionResult<Home>> Get()
     {
         var data = await _homeSer.GetHome();
@@ -36,6 +40,8 @@ public class HomeController : Controller
     /// <returns>Json Products</returns>
     [HttpPost]
     [Route("InsertProducts")]
+    [ProducesResponseType(200, Type = typeof(Home))]
+    [ProducesResponseType(404)]
     public async Task<ActionResult<Home>> Post(CreateProduct add)
     {
         var data = await _homeSer.InsertProducts(add);
