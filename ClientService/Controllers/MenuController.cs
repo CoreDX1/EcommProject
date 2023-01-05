@@ -16,6 +16,10 @@ public class MenuController : Controller
         this.menu = _menu;
     }
 
+    /// summary>
+    /// Get all categories and subcategories
+    /// </summary>
+    /// <returns> Return menu </returns>
     [HttpGet]
     [ProducesResponseType(200), ProducesResponseType(404)]
     [ProducesDefaultResponseType, Produces("application/json")]
