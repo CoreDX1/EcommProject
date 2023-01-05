@@ -28,7 +28,7 @@ public class DataContext : DbContext
 
     builder.Entity<TypeProduct>(entity =>
     {
-      entity.ToTable("typeproduct").HasKey(p => p.id_type_prod);
+      entity.ToTable("typeproduct").HasKey(p => p.id_type_product);
     });
 
     builder.Entity<Product>(entity =>
