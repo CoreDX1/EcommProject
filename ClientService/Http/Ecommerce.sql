@@ -15,7 +15,7 @@ create table subcategory(
 	references category(id_category)
 )
 
-create table usuarios(
+CREATE TABLE usuarios(
 	id_user smallserial not null,
 	username varchar(20) not null,
 	password varchar(20) not null,
@@ -55,6 +55,7 @@ select
 
 select * from usuarios;
 select * from subcategory;
+select * from typeproduct;
 
 -- Insert TypeProduct
 insert
@@ -62,7 +63,6 @@ insert
 	typeproduct(name,id_sub_category) 
 	values('pantalon blaco', 1),('pantalon negro', 1);
 
-select * from home;
 
 INSERT INTO home (title, price, image)
 VALUES ('Buzo Canguro', 1000, 'Products/BuzoCanguro.jpg'),

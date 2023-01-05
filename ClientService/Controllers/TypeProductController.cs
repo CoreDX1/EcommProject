@@ -15,7 +15,14 @@ public class TypeProductController : Controller
         typeProduct = entity;
     }
 
+    /// <summary>
+    /// Get all TypeProduct
+    /// </summary>
+    /// <returns> Returns the typeproducts data in json format</returns>
     [HttpGet]
+    [ProducesDefaultResponseType, Produces("application/json")]
+    [ProducesResponseType(200, Type = typeof(Home))]
+    [ProducesResponseType(404, Type = typeof(string))]
     public async Task<ActionResult<TypeProduct>> Get()
     {
         List<TypeProduct> data = await typeProduct.GetAll();

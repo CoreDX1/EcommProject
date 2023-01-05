@@ -14,6 +14,10 @@ public class TypeProductSer : ITypeProduct {
         this.dbpost = context;
     }
 
+    /// <summary>
+    /// Get all TypeProduct
+    /// </summary>
+    /// <returns> Returns the typeproducts data</returns>
     public async Task<List<TypeProduct>> GetAll()
     {
         var response = await dbpost.TypeProducts.ToListAsync();

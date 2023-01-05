@@ -45,14 +45,19 @@ public class UsuarioSer : IUsuario
     /// <returns> Data entered</returns>
     public async Task<Usuario> CreateUser(Register add)
     {
-    // SI El Email Existe no se va a crear el Usuario
-    UsuarioRequestValidator.Validate(add);
 
+    // SI El Email Existe no se va a crear el Usuario
     var data = await dbpost.Usuarios
         .Where(x => x.email == add.email)
         .FirstOrDefaultAsync();
-    if (data != null) return null;
+
     // Si el Email no existe se va a crear el usuario
+    if (data != null) return null;
+
+    // Validar los datos
+    UsuarioRequestValidator.Validate(add);
+
+    // Crear el usuario
         Usuario user = new Usuario()
         {
             username = add.username,
@@ -61,8 +66,11 @@ public class UsuarioSer : IUsuario
             rol = "empleado",
         };
 
+        // Guardar el usuario
         await dbpost.Usuarios.AddAsync(user);
+        // Guardar los cambios
         await dbpost.SaveChangesAsync();
+        // Retornar el usuario
         return user;
     }
 }

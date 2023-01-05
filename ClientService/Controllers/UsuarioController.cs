@@ -62,7 +62,7 @@ public class UsuarioController : Controller
     [Consumes("application/json")]
     [ProducesDefaultResponseType, Produces("application/json")]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
     public async Task<dynamic> IniciarSesion([FromBody] Object optdata)
     {
         dynamic data = JsonConvert.DeserializeObject<dynamic>(optdata.ToString());

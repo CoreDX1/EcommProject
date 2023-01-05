@@ -1,11 +1,7 @@
 @hostname = http://localhost:5020/api
-### Category
-@urlC = Category
-GET {{hostname}}/{{urlC}}
-Content-Type: application/json
 
-### SubCategory
-@urlS = SubCategory
+### Menu Web Site
+@urlS = Menu
 GET {{hostname}}/{{urlS}}
 Content-Type: application/json
 
@@ -14,28 +10,23 @@ Content-Type: application/json
 GET {{hostname}}/{{urlT}}
 Content-Type: application/json
 
-### TypeProduct
-@urlP = Product
-GET {{hostname}}/{{urlP}}
-Content-Type: application/json
-
-### Usuarios GET
+### Lista de Usuarios
 @urlU = Usuario
 GET {{hostname}}/{{urlU}}
 Content-Type: application/json
 
-### Usuario Register POST
+### Usuario Register
 @register = register
 POST {{hostname}}/{{urlU}}/{{register}}
 Content-Type: application/json
 
  {
-    "username": "aa",
-    "email": "chrisaaaaaaaasdf@gmail.com",
-    "password": ""
+    "username": "Julian",
+    "email": "julina@gmail.com",
+    "password": "index"
  }
 
-### Usuario Login POST
+### Usuario Login
 @login = token
 POSt {{hostname}}/{{urlU}}/{{login}}
 Content-Type: application/json
