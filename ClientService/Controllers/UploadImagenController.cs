@@ -13,7 +13,15 @@ public class UploadImagenController : ControllerBase
         _uploadImagen = uploadImagen;
     }
 
+    /// <summary>
+    /// Upload image
+    /// </summary>
+    /// <param name="imagen">Image</param>
+    /// <returns>Return message</returns>
     [HttpPost, DisableRequestSizeLimit]
+    [ProducesResponseType(200, Type = typeof(string))]
+    [ProducesResponseType(400, Type = typeof(string))]
+    [ProducesDefaultResponseType, Produces("apllication/text")]
     public IActionResult PostImagen(IFormFile imagen)
     {
         try
