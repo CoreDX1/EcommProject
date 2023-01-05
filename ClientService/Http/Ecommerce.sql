@@ -63,6 +63,7 @@ insert
 	typeproduct(name,id_sub_category) 
 	values('pantalon blaco', 1),('pantalon negro', 1);
 
+-- Comentario
 
 INSERT INTO home (title, price, image)
 VALUES ('Buzo Canguro', 1000, 'Products/BuzoCanguro.jpg'),
