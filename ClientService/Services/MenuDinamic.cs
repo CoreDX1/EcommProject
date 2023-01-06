@@ -36,7 +36,7 @@ public class MenuDinamic : IMenuDinamic
                                select s.name)
                    };
     /// Lo convierto a JSON
-    var json = JsonConvert.SerializeObject(linqDate);
+    string json = JsonConvert.SerializeObject(linqDate);
     /// Lo convierto a una lista de objetos
     List<Menu> menu = JsonConvert.DeserializeObject<List<Menu>>(json);
     return menu;
