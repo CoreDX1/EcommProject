@@ -55,6 +55,7 @@ select
 
 select * from usuarios;
 select * from subcategory;
+select * from category;
 select * from typeproduct;
 
 -- Insert TypeProduct
