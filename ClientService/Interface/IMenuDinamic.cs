@@ -1,6 +1,8 @@
+using EcommEntity.Models;
+
 namespace ClientService.Interface;
 
 public interface IMenuDinamic
 {
-    public Task<List<Dictionary<string, object>>> GetCategorySubCategory();
+    public Task<List<Menu>> GetCategorySubCategory();
 }
