@@ -16,11 +16,6 @@ interface IMenuDinamic {
     submenu: Array<string>
 }
 
-// interface Usuario {
-// email: string;
-// password: string;
-// }
-
 export interface CategoryApi<T> {
     getAll: () => Promise<T[]>
 }
