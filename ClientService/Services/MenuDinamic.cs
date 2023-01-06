@@ -31,9 +31,9 @@ public class MenuDinamic : IMenuDinamic
                    {
                      c.id_category,
                      c.name,
-                     submenu = from s in subCategories
+                     submenu = (from s in subCategories
                                where s.id_category == c.id_category
-                               select s
+                               select s.name)
                    };
     /// Lo convierto a JSON
     var json = JsonConvert.SerializeObject(linqDate);
