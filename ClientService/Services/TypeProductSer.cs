@@ -1,5 +1,5 @@
 using ClientService.Interface;
-using EcommData.Data;
+using EcommData.Context;
 using EcommEntity.Models;
 using Microsoft.EntityFrameworkCore;
 

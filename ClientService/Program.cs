@@ -1,7 +1,6 @@
-using EcommData.Data;
+using EcommData.Context;
 using ClientService.Interface;
 using ClientService.Services;
-using EcommEntity.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;

@@ -1,7 +1,7 @@
 using EcommEntity.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace EcommData.Data;
+namespace EcommData.Context;
 
 public class DataContext : DbContext
 {

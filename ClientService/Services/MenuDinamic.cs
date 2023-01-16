@@ -1,6 +1,6 @@
 using EcommEntity.Models;
 
-using EcommData.Data;
+using EcommData.Context;
 using Microsoft.EntityFrameworkCore;
 using ClientService.Interface;
 using Newtonsoft.Json;
