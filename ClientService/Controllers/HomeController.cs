@@ -10,6 +10,7 @@ namespace ClientService.Controllers;
 public class HomeController : Controller
 {
     private readonly IHome _homeSer;
+
     public HomeController(IHome homeSer)
     {
         _homeSer = homeSer;
@@ -29,7 +30,8 @@ public class HomeController : Controller
     public async Task<ActionResult<Home>> Get()
     {
         var data = await _homeSer.GetHome();
-        if(data != null) return StatusCode(200, data);
+        if (data != null)
+            return StatusCode(200, data);
         return StatusCode(404, "No hay datos");
     }
 
@@ -45,7 +47,8 @@ public class HomeController : Controller
     public async Task<ActionResult<Home>> Post(CreateProduct add)
     {
         var data = await _homeSer.InsertProducts(add);
-        if(data != null) return StatusCode(200, data);
+        if (data != null)
+            return StatusCode(200, data);
         return StatusCode(404, "No se pudo insertar");
     }
 
@@ -61,17 +64,21 @@ public class HomeController : Controller
     {
         var indentiy = HttpContext.User.Identity as ClaimsIdentity;
         var data = await _homeSer.ValidarToken(indentiy);
-        if(!data.success ) return data;
+        if (!data.success)
+            return data;
         Usuario user = data.result;
-        if(user.rol != "admin") {
-            return new {
+        if (user.rol != "admin")
+        {
+            return new
+            {
                 success = false,
                 message = "No tiene permisos para eliminar",
                 result = ""
             };
         }
         var homeproduct = await _homeSer.DeleteProducts(id.id_home);
-        return new {
+        return new
+        {
             success = true,
             message = "Producto eliminado",
             result = id
